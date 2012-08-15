@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Engine", "Sage Engine\Sage Engine.csproj", "{DDC1AC20-7820-4425-93C7-31A39CA9EC14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Editor", "Sage Editor\Sage Editor.csproj", "{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{DDC1AC20-7820-4425-93C7-31A39CA9EC14}.Debug|x86.Build.0 = Debug|x86
 		{DDC1AC20-7820-4425-93C7-31A39CA9EC14}.Release|x86.ActiveCfg = Release|x86
 		{DDC1AC20-7820-4425-93C7-31A39CA9EC14}.Release|x86.Build.0 = Release|x86
+		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Debug|x86.ActiveCfg = Debug|x86
+		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Debug|x86.Build.0 = Debug|x86
+		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Release|x86.ActiveCfg = Release|x86
+		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
