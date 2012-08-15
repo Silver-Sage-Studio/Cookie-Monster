@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Engine", "Sage Engine\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Editor", "Sage Editor\Sage Editor.csproj", "{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTester", "EngineTester\EngineTester\EngineTester.csproj", "{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieMonsterGame", "EngineTester\EngineTester\CookieMonsterGame.csproj", "{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "EngineTesterContent", "EngineTester\EngineTesterContent\EngineTesterContent.contentproj", "{3733D38E-72B9-4AC3-9F1E-B9122ED9E136}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTesterContent", "EngineTester\EngineTesterContent\EngineTesterContent.contentproj", "{3733D38E-72B9-4AC3-9F1E-B9122ED9E136}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

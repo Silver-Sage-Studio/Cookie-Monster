@@ -1,6 +1,6 @@
 using System;
 
-namespace EngineTester
+namespace CookieMonsterGame
 {
 #if WINDOWS || XBOX
     static class Program
