@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Engine", "Sage Engine\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage Editor", "Sage Editor\Sage Editor.csproj", "{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTester", "EngineTester\EngineTester\EngineTester.csproj", "{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "EngineTesterContent", "EngineTester\EngineTesterContent\EngineTesterContent.contentproj", "{3733D38E-72B9-4AC3-9F1E-B9122ED9E136}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +23,12 @@ Global
 		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Debug|x86.Build.0 = Debug|x86
 		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Release|x86.ActiveCfg = Release|x86
 		{B0FD1ACC-C4A9-4EA9-83C5-329B97CD5A2C}.Release|x86.Build.0 = Release|x86
+		{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}.Debug|x86.ActiveCfg = Debug|x86
+		{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}.Debug|x86.Build.0 = Debug|x86
+		{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}.Release|x86.ActiveCfg = Release|x86
+		{2E2DEA24-656B-4389-A3E0-5566F1AB7A6B}.Release|x86.Build.0 = Release|x86
+		{3733D38E-72B9-4AC3-9F1E-B9122ED9E136}.Debug|x86.ActiveCfg = Debug|x86
+		{3733D38E-72B9-4AC3-9F1E-B9122ED9E136}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
