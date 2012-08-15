@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-    public class spriteAnimation
+    public class SpriteAnimation
     {
         public Texture2D texture;
         string currentAnimation;
         Vector2 location;
         bool animating = true;
-        public Dictionary<string, framAnimation> animations = new Dictionary<string, framAnimation>();
+        public Dictionary<string, FrameAnimation> animations = new Dictionary<string, FrameAnimation>();
 
         public string CurrentAnimationName
         {
@@ -49,7 +49,7 @@ namespace Sage_Engine
             }
         }
 
-        public framAnimation CurrentAnimation
+        public FrameAnimation CurrentAnimation
         {
             get
             {
@@ -70,7 +70,7 @@ namespace Sage_Engine
             }
         }
 
-        public spriteAnimation(Texture2D texture)
+        public SpriteAnimation(Texture2D texture)
         {
             this.texture = texture;
             location = Vector2.Zero;
@@ -79,7 +79,7 @@ namespace Sage_Engine
         public void Update(GameTime gameTime, Vector2 location)
         {
             this.location = location;
-            framAnimation anim = CurrentAnimation;
+            FrameAnimation anim = CurrentAnimation;
             if (anim == null)
             {
                 return;
@@ -90,7 +90,7 @@ namespace Sage_Engine
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            framAnimation anim = CurrentAnimation;
+            FrameAnimation anim = CurrentAnimation;
             if (anim == null)
             {
                 return;
@@ -100,14 +100,14 @@ namespace Sage_Engine
             spriteBatch.Draw(texture, location, anim.CurrentRect, Color.White);
         }
 
-        public spriteAnimation(spriteAnimation anim)
+        public SpriteAnimation(SpriteAnimation anim)
         {
             texture = anim.texture;
             currentAnimation = anim.currentAnimation;
             location = anim.location;
             animating = true;
 
-            foreach (KeyValuePair<string, framAnimation> s in anim.animations)
+            foreach (KeyValuePair<string, FrameAnimation> s in anim.animations)
                 animations.Add(s.Key, s.Value.Clone());
 
         }

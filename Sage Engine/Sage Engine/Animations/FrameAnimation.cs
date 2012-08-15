@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-    public class framAnimation
+    public class FrameAnimation
     {
         Rectangle[] animations;
         int currentRect;
@@ -22,7 +22,7 @@ namespace Sage_Engine
 
 
 
-        private framAnimation(float framesPerSecond, float secondsToDisplayFrame, Rectangle[] animations)
+        private FrameAnimation(float framesPerSecond, float secondsToDisplayFrame, Rectangle[] animations)
         {
             this.framesPerSecond = framesPerSecond;
             this.animations = new Rectangle[animations.Length];
@@ -33,7 +33,7 @@ namespace Sage_Engine
 
         }
 
-        public framAnimation(float framesPerSecond, int width, int height, int noOfFrames, int xOfSet, int yOfSet, Point rowCol)
+        public FrameAnimation(float framesPerSecond, int width, int height, int noOfFrames, int xOfSet, int yOfSet, Point rowCol)
         {
 
 
@@ -80,9 +80,9 @@ namespace Sage_Engine
 
         }
 
-        public framAnimation Clone()
+        public FrameAnimation Clone()
         {
-            return new framAnimation(framesPerSecond, secondsToDisplayFrame, animations);
+            return new FrameAnimation(framesPerSecond, secondsToDisplayFrame, animations);
         }
 
 
