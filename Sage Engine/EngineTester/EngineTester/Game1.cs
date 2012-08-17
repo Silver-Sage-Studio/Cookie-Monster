@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Sage_Engine;
 
 namespace CookieMonsterGame
 {
@@ -19,10 +20,13 @@ namespace CookieMonsterGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
+            
         }
 
         /// <summary>
@@ -34,7 +38,7 @@ namespace CookieMonsterGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Components.Add(new InputHandler(this));
             base.Initialize();
         }
 
@@ -46,7 +50,6 @@ namespace CookieMonsterGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
         }
 

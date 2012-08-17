@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-    class InputHandler : GameComponent
+   public class InputHandler : GameComponent
     {
         static KeyboardState keyBoardState;
         static KeyboardState lastkeyBoardState;

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-    public class SpriteAnimation
+     class SpriteAnimation
     {
         public Texture2D texture;
         string currentAnimation;

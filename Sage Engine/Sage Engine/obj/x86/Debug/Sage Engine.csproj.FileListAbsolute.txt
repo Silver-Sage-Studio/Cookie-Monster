@@ -4,3 +4,9 @@ C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Deb
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Sage Engine.dll
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Sage Engine.pdb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\bin\x86\Debug\Sage Engine.dll
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\bin\x86\Debug\Sage Engine.pdb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Sage Engine.dll
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Engine\obj\x86\Debug\Sage Engine.pdb
