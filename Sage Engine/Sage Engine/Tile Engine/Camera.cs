@@ -11,7 +11,7 @@ namespace Sage_Engine
     {
 
         //Call this Method In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world Co-Ordinates.
-        public Matrix TransFormMatrix
+        public static Matrix TransFormMatrix
         {
             get
             {
@@ -21,12 +21,12 @@ namespace Sage_Engine
 
 
         //Set this Camera Postion.
-        public Vector2 position = Vector2.Zero;
+        public static Vector2 position = Vector2.Zero;
 
 
 
         //Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
-        public void ClampToMap(int Width, int Height)
+        public static void ClampToMap(int Width, int Height)
         {
             if (position.X < 0)
             {

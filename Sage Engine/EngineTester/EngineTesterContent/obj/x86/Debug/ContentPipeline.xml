@@ -7,15 +7,15 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTesterContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTesterContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTesterContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTesterContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-05-09T00:47:16.1338654-07:00</Value>
+        <Value>2012-03-21T15:05:48.4534714+05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
