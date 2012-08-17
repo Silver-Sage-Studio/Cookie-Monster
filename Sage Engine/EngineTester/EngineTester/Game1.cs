@@ -25,7 +25,7 @@ namespace CookieMonsterGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+  
             
         }
 
