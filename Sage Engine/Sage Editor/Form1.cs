@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Sage_Engine;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Sage_Editor
 {
     public partial class Form1 : Form
     {
+        SpriteBatch spriteBatch;
+        Camera camera = new Camera();
+        //TileLayer tileLayer = new TileLayer(new int[,] { });
+
+
         public Form1()
         {
+            tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
+            tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void tileDisplay1_OnDraw(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
 
-        private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        void tileDisplay1_OnInitialise(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
 
-        private void loadMapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
