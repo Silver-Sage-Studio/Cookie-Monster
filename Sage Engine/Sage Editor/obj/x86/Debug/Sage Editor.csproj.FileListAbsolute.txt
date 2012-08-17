@@ -18,3 +18,5 @@ C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.dll
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.pdb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.dll
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.pdb

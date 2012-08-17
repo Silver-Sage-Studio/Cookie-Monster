@@ -12,3 +12,5 @@ C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTest
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\obj\x86\Debug\EngineTester.exe
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\obj\x86\Debug\EngineTester.pdb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Sage Engine.dll
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Sage Engine.pdb
