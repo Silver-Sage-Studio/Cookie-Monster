@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Sage_Engine
 {
-     class TileMap
+   public class TileMap
     {
+       List<TileLayer> Layers = new List<TileLayer>();
+
+
     }
 }
