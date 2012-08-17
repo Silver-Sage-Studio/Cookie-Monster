@@ -21,5 +21,20 @@ namespace Sage_Editor
         {
 
         }
+
+        private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
