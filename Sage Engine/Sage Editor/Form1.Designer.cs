@@ -31,26 +31,26 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitBitchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitBitchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tileDisplay1 = new Sage_Editor.TileDisplay();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tileDisplay1 = new Sage_Editor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +75,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            
+            // 
             // layerToolStripMenuItem
             // 
             this.layerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -86,32 +86,6 @@
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
             this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.layerToolStripMenuItem.Text = "Layer";
-            // 
-            // mapToolStripMenuItem
-            // 
-            this.mapToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveMapToolStripMenuItem,
-            this.saveAsMapToolStripMenuItem,
-            this.loadMapToolStripMenuItem});
-            this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.mapToolStripMenuItem.Text = "Map";
-            // 
-            // levelToolStripMenuItem
-            // 
-            this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveLevelToolStripMenuItem,
-            this.saveAsLevelToolStripMenuItem,
-            this.loadLevelToolStripMenuItem});
-            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.levelToolStripMenuItem.Text = "Level";
-            // 
-            // exitBitchesToolStripMenuItem
-            // 
-            this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             // 
             // saveLayerToolStripMenuItem
             // 
@@ -137,6 +111,16 @@
             this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.loadLayerToolStripMenuItem.Text = "Load Layer";
             // 
+            // mapToolStripMenuItem
+            // 
+            this.mapToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveMapToolStripMenuItem,
+            this.saveAsMapToolStripMenuItem,
+            this.loadMapToolStripMenuItem});
+            this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mapToolStripMenuItem.Text = "Map";
+            // 
             // saveMapToolStripMenuItem
             // 
             this.saveMapToolStripMenuItem.Name = "saveMapToolStripMenuItem";
@@ -155,6 +139,16 @@
             this.loadMapToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.loadMapToolStripMenuItem.Text = "Load Map";
             // 
+            // levelToolStripMenuItem
+            // 
+            this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveLevelToolStripMenuItem,
+            this.saveAsLevelToolStripMenuItem,
+            this.loadLevelToolStripMenuItem});
+            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.levelToolStripMenuItem.Text = "Level";
+            // 
             // saveLevelToolStripMenuItem
             // 
             this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
@@ -172,6 +166,12 @@
             this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
             this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.loadLevelToolStripMenuItem.Text = "Load Level";
+            // 
+            // exitBitchesToolStripMenuItem
+            // 
+            this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             // 
             // tabControl1
             // 
@@ -208,16 +208,6 @@
             this.tabPage2.Text = "Collision Map";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tileDisplay1
-            // 
-            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.tileDisplay1.Location = new System.Drawing.Point(12, 27);
-            this.tileDisplay1.Name = "tileDisplay1";
-            this.tileDisplay1.Size = new System.Drawing.Size(687, 535);
-            this.tileDisplay1.TabIndex = 0;
-            this.tileDisplay1.Text = "tileDisplay1";
-            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -248,6 +238,17 @@
             this.tabPage5.Text = "Animations";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // tileDisplay1
+            // 
+            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.tileDisplay1.Location = new System.Drawing.Point(12, 27);
+            this.tileDisplay1.Name = "tileDisplay1";
+            this.tileDisplay1.Size = new System.Drawing.Size(687, 535);
+            this.tileDisplay1.TabIndex = 0;
+            this.tileDisplay1.Text = "tileDisplay1";
+            this.tileDisplay1.Click += new System.EventHandler(this.tileDisplay1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,7 +260,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

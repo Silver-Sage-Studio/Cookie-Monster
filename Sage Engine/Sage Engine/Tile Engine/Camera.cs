@@ -10,7 +10,7 @@ namespace Sage_Engine
     public class Camera
     {
 
-        //Call this Method In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world Co-Ordinates.
+        //Call this Propety In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world co-ordinates.
         public static Matrix TransFormMatrix
         {
             get

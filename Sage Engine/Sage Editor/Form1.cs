@@ -34,5 +34,10 @@ namespace Sage_Editor
             throw new NotImplementedException();
         }
 
+        private void tileDisplay1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
