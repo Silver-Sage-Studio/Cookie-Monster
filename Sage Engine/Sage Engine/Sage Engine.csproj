@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations\FrameAnimation.cs" />
+    <Compile Include="Animations\SpriteAnimation.cs" />
     <Compile Include="DrawAble.cs" />
     <Compile Include="Handler Classes\InputHandler.cs" />
     <Compile Include="Particle Engine\ParticleEffect1.cs" />
@@ -105,7 +106,6 @@
     <Compile Include="Physics\OnCollisonMethods\IRectCollided.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Handler Classes\SoundHandler.cs" />
-    <Compile Include="Animations\SpriteAnimation.cs" />
     <Compile Include="Spells\ConcreteSpells\SpellInterface.cs" />
     <Compile Include="Spells\WrapperSpells\WrapperInterface.cs" />
     <Compile Include="Tile Engine\Camera.cs" />

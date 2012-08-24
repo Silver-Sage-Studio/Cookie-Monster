@@ -12,13 +12,14 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-     class SpriteAnimation
+   public class SpriteAnimation
     {
-        public Texture2D texture;
+        private Texture2D texture;
         string currentAnimation;
         Vector2 location;
         bool animating = true;
-        public Dictionary<string, FrameAnimation> animations = new Dictionary<string, FrameAnimation>();
+        Dictionary<string, FrameAnimation> animations = new Dictionary<string, FrameAnimation>();
+
 
         public string CurrentAnimationName
         {
@@ -78,6 +79,9 @@ namespace Sage_Engine
 
         public void Update(GameTime gameTime, Vector2 location)
         {
+            if (!isAnimating)
+                return;
+
             this.location = location;
             FrameAnimation anim = CurrentAnimation;
             if (anim == null)
@@ -96,8 +100,9 @@ namespace Sage_Engine
                 return;
             }
 
-
-            spriteBatch.Draw(texture, location, anim.CurrentRect, Color.White);
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, Camera.TransFormMatrix);
+            spriteBatch.Draw(texture, location, anim.CurrentRect, Color.White); // Havent Tester this code yet. Someone Test and get back to me
+            spriteBatch.End();
         }
 
         public SpriteAnimation(SpriteAnimation anim)
@@ -110,6 +115,18 @@ namespace Sage_Engine
             foreach (KeyValuePair<string, FrameAnimation> s in anim.animations)
                 animations.Add(s.Key, s.Value.Clone());
 
+        }
+
+
+       /// <summary>
+       /// Use this to Add more frame Animation's for this sprite.
+       /// </summary>
+       /// <param name="Key"></param>
+       /// <param name="Animation"></param>
+        public void AddAnimations(string Key, FrameAnimation Animation)
+        {
+            if(Animation != null)
+                animations.Add(Key, Animation);
         }
 
 

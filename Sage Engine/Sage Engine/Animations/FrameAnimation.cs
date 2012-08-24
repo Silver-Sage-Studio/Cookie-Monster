@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
-     class FrameAnimation
+    public class FrameAnimation
     {
         Rectangle[] animations;
         int currentRect;

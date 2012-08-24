@@ -46,13 +46,34 @@
             this.exitBitchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chekFill = new System.Windows.Forms.CheckBox();
+            this.radErase = new System.Windows.Forms.RadioButton();
+            this.radDraw = new System.Windows.Forms.RadioButton();
+            this.barAlpha = new System.Windows.Forms.TrackBar();
+            this.btnRemoveLayer = new System.Windows.Forms.Button();
+            this.btnRemoveTexture = new System.Windows.Forms.Button();
+            this.btnAddLayer = new System.Windows.Forms.Button();
+            this.btnAddTexture = new System.Windows.Forms.Button();
+            this.LayerList = new System.Windows.Forms.ListBox();
+            this.TextureList = new System.Windows.Forms.ListBox();
+            this.texPathAddress = new System.Windows.Forms.TextBox();
+            this.btnAddFiles = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tileDisplay1 = new Sage_Editor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAlpha)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -61,7 +82,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1045, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,7 +105,7 @@
             this.saveAllLayerToolStripMenuItem,
             this.loadLayerToolStripMenuItem});
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
-            this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.layerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.layerToolStripMenuItem.Text = "Layer";
             // 
             // saveLayerToolStripMenuItem
@@ -118,7 +139,7 @@
             this.saveAsMapToolStripMenuItem,
             this.loadMapToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.mapToolStripMenuItem.Text = "Map";
             // 
             // saveMapToolStripMenuItem
@@ -146,7 +167,7 @@
             this.saveAsLevelToolStripMenuItem,
             this.loadLevelToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // saveLevelToolStripMenuItem
@@ -170,8 +191,9 @@
             // exitBitchesToolStripMenuItem
             // 
             this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
+            this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -182,28 +204,173 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(705, 27);
+            this.tabControl1.Location = new System.Drawing.Point(703, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(328, 535);
+            this.tabControl1.Size = new System.Drawing.Size(328, 654);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.pictureBox1);
+            this.tabPage1.Controls.Add(this.chekFill);
+            this.tabPage1.Controls.Add(this.radErase);
+            this.tabPage1.Controls.Add(this.radDraw);
+            this.tabPage1.Controls.Add(this.barAlpha);
+            this.tabPage1.Controls.Add(this.btnRemoveLayer);
+            this.tabPage1.Controls.Add(this.btnRemoveTexture);
+            this.tabPage1.Controls.Add(this.btnAddLayer);
+            this.tabPage1.Controls.Add(this.btnAddTexture);
+            this.tabPage1.Controls.Add(this.LayerList);
+            this.tabPage1.Controls.Add(this.TextureList);
+            this.tabPage1.Controls.Add(this.texPathAddress);
+            this.tabPage1.Controls.Add(this.btnAddFiles);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(320, 509);
+            this.tabPage1.Size = new System.Drawing.Size(320, 628);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Tile Map";
+            this.tabPage1.Text = "TileMap";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Enabled = false;
+            this.pictureBox1.Location = new System.Drawing.Point(45, 418);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(211, 202);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // chekFill
+            // 
+            this.chekFill.AutoSize = true;
+            this.chekFill.Enabled = false;
+            this.chekFill.Location = new System.Drawing.Point(205, 44);
+            this.chekFill.Name = "chekFill";
+            this.chekFill.Size = new System.Drawing.Size(38, 17);
+            this.chekFill.TabIndex = 8;
+            this.chekFill.Text = "Fill";
+            this.chekFill.UseVisualStyleBackColor = true;
+            // 
+            // radErase
+            // 
+            this.radErase.AutoSize = true;
+            this.radErase.Enabled = false;
+            this.radErase.Location = new System.Drawing.Point(123, 43);
+            this.radErase.Name = "radErase";
+            this.radErase.Size = new System.Drawing.Size(52, 17);
+            this.radErase.TabIndex = 7;
+            this.radErase.TabStop = true;
+            this.radErase.Text = "Erase";
+            this.radErase.UseVisualStyleBackColor = true;
+            // 
+            // radDraw
+            // 
+            this.radDraw.AutoSize = true;
+            this.radDraw.Enabled = false;
+            this.radDraw.Location = new System.Drawing.Point(36, 43);
+            this.radDraw.Name = "radDraw";
+            this.radDraw.Size = new System.Drawing.Size(50, 17);
+            this.radDraw.TabIndex = 6;
+            this.radDraw.TabStop = true;
+            this.radDraw.Text = "Draw";
+            this.radDraw.UseVisualStyleBackColor = true;
+            // 
+            // barAlpha
+            // 
+            this.barAlpha.Enabled = false;
+            this.barAlpha.Location = new System.Drawing.Point(23, 67);
+            this.barAlpha.Maximum = 100;
+            this.barAlpha.Name = "barAlpha";
+            this.barAlpha.Size = new System.Drawing.Size(278, 45);
+            this.barAlpha.TabIndex = 5;
+            // 
+            // btnRemoveLayer
+            // 
+            this.btnRemoveLayer.Enabled = false;
+            this.btnRemoveLayer.Location = new System.Drawing.Point(181, 229);
+            this.btnRemoveLayer.Name = "btnRemoveLayer";
+            this.btnRemoveLayer.Size = new System.Drawing.Size(94, 23);
+            this.btnRemoveLayer.TabIndex = 4;
+            this.btnRemoveLayer.Text = "Remove Layer";
+            this.btnRemoveLayer.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveTexture
+            // 
+            this.btnRemoveTexture.Enabled = false;
+            this.btnRemoveTexture.Location = new System.Drawing.Point(181, 380);
+            this.btnRemoveTexture.Name = "btnRemoveTexture";
+            this.btnRemoveTexture.Size = new System.Drawing.Size(94, 23);
+            this.btnRemoveTexture.TabIndex = 4;
+            this.btnRemoveTexture.Text = "Remove Texture";
+            this.btnRemoveTexture.UseVisualStyleBackColor = true;
+            // 
+            // btnAddLayer
+            // 
+            this.btnAddLayer.Enabled = false;
+            this.btnAddLayer.Location = new System.Drawing.Point(54, 229);
+            this.btnAddLayer.Name = "btnAddLayer";
+            this.btnAddLayer.Size = new System.Drawing.Size(91, 23);
+            this.btnAddLayer.TabIndex = 3;
+            this.btnAddLayer.Text = "Add Layer";
+            this.btnAddLayer.UseVisualStyleBackColor = true;
+            // 
+            // btnAddTexture
+            // 
+            this.btnAddTexture.Enabled = false;
+            this.btnAddTexture.Location = new System.Drawing.Point(54, 380);
+            this.btnAddTexture.Name = "btnAddTexture";
+            this.btnAddTexture.Size = new System.Drawing.Size(91, 23);
+            this.btnAddTexture.TabIndex = 3;
+            this.btnAddTexture.Text = "Add Texture";
+            this.btnAddTexture.UseVisualStyleBackColor = true;
+            // 
+            // LayerList
+            // 
+            this.LayerList.Enabled = false;
+            this.LayerList.FormattingEnabled = true;
+            this.LayerList.Location = new System.Drawing.Point(23, 132);
+            this.LayerList.Name = "LayerList";
+            this.LayerList.Size = new System.Drawing.Size(278, 82);
+            this.LayerList.TabIndex = 2;
+            // 
+            // TextureList
+            // 
+            this.TextureList.Enabled = false;
+            this.TextureList.FormattingEnabled = true;
+            this.TextureList.Location = new System.Drawing.Point(23, 276);
+            this.TextureList.Name = "TextureList";
+            this.TextureList.Size = new System.Drawing.Size(278, 82);
+            this.TextureList.TabIndex = 2;
+            // 
+            // texPathAddress
+            // 
+            this.texPathAddress.Location = new System.Drawing.Point(22, 18);
+            this.texPathAddress.Name = "texPathAddress";
+            this.texPathAddress.ReadOnly = true;
+            this.texPathAddress.Size = new System.Drawing.Size(231, 20);
+            this.texPathAddress.TabIndex = 1;
+          
+            // 
+            // btnAddFiles
+            // 
+            this.btnAddFiles.Location = new System.Drawing.Point(259, 17);
+            this.btnAddFiles.Name = "btnAddFiles";
+            this.btnAddFiles.Size = new System.Drawing.Size(41, 23);
+            this.btnAddFiles.TabIndex = 0;
+            this.btnAddFiles.Text = "...";
+            this.btnAddFiles.UseVisualStyleBackColor = true;
+            this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(320, 509);
+            this.tabPage2.Size = new System.Drawing.Size(320, 628);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Collision Map";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -213,7 +380,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(320, 509);
+            this.tabPage3.Size = new System.Drawing.Size(320, 628);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Enemy";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -223,7 +390,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(320, 509);
+            this.tabPage4.Size = new System.Drawing.Size(320, 628);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Objects";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -233,36 +400,67 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(320, 509);
+            this.tabPage5.Size = new System.Drawing.Size(320, 628);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Animations";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(682, 27);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 633);
+            this.vScrollBar1.TabIndex = 3;
+            this.vScrollBar1.Visible = false;
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBar1.Location = new System.Drawing.Point(15, 658);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(667, 19);
+            this.hScrollBar1.TabIndex = 4;
+            this.hScrollBar1.Visible = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // tileDisplay1
             // 
-            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tileDisplay1.Location = new System.Drawing.Point(12, 27);
             this.tileDisplay1.Name = "tileDisplay1";
-            this.tileDisplay1.Size = new System.Drawing.Size(687, 535);
+            this.tileDisplay1.Size = new System.Drawing.Size(668, 631);
             this.tileDisplay1.TabIndex = 0;
             this.tileDisplay1.Text = "tileDisplay1";
-            this.tileDisplay1.Click += new System.EventHandler(this.tileDisplay1_Click);
+           
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 574);
+            this.ClientSize = new System.Drawing.Size(1043, 693);
+            this.Controls.Add(this.hScrollBar1);
+            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tileDisplay1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Sages Engine";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAlpha)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,11 +486,29 @@
         private System.Windows.Forms.ToolStripMenuItem loadLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitBitchesToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TrackBar barAlpha;
+        private System.Windows.Forms.Button btnRemoveLayer;
+        private System.Windows.Forms.Button btnRemoveTexture;
+        private System.Windows.Forms.Button btnAddLayer;
+        private System.Windows.Forms.Button btnAddTexture;
+        private System.Windows.Forms.ListBox LayerList;
+        private System.Windows.Forms.ListBox TextureList;
+        private System.Windows.Forms.TextBox texPathAddress;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox chekFill;
+        private System.Windows.Forms.RadioButton radErase;
+        private System.Windows.Forms.RadioButton radDraw;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.Button btnAddFiles;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

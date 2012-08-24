@@ -52,11 +52,33 @@ namespace Sage_Engine
 
        }
 
+       
+
        public static int SetTileHeight
        {
            set
            {
                TileHeight = Math.Max(value, 16);
+           }
+
+       }
+
+       public static int GetTileWidth
+       {
+           get
+           {
+               return TileWidth;
+           }
+
+       }
+
+
+
+       public static int GetTileHeight
+       {
+           get
+           {
+               return TileHeight;
            }
 
        }
@@ -159,7 +181,7 @@ namespace Sage_Engine
                        Texture2D texture = textureList[Index];
                        spriteBatch.Draw(texture, 
                            new Rectangle(
-                           TileWidth * x, TileHeight * y, TileWidth, TileHeight
+                           TileWidth * x , TileHeight * y, TileWidth, TileHeight
                            ), 
                            new Color( new Vector4(1f, 1f, 1f, alpha)));
 
