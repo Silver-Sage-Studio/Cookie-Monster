@@ -105,7 +105,7 @@
             this.saveAllLayerToolStripMenuItem,
             this.loadLayerToolStripMenuItem});
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
-            this.layerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.layerToolStripMenuItem.Text = "Layer";
             // 
             // saveLayerToolStripMenuItem
@@ -139,7 +139,7 @@
             this.saveAsMapToolStripMenuItem,
             this.loadMapToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.mapToolStripMenuItem.Text = "Map";
             // 
             // saveMapToolStripMenuItem
@@ -167,7 +167,7 @@
             this.saveAsLevelToolStripMenuItem,
             this.loadLevelToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // saveLevelToolStripMenuItem
@@ -191,7 +191,7 @@
             // exitBitchesToolStripMenuItem
             // 
             this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
             // 
@@ -353,7 +353,6 @@
             this.texPathAddress.ReadOnly = true;
             this.texPathAddress.Size = new System.Drawing.Size(231, 20);
             this.texPathAddress.TabIndex = 1;
-          
             // 
             // btnAddFiles
             // 
@@ -436,7 +435,6 @@
             this.tileDisplay1.Size = new System.Drawing.Size(668, 631);
             this.tileDisplay1.TabIndex = 0;
             this.tileDisplay1.Text = "tileDisplay1";
-           
             // 
             // Form1
             // 
@@ -453,7 +451,6 @@
             this.Name = "Form1";
             this.Text = "Sages Engine";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

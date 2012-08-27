@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sage_Engine
 {
+    // Need to look into Making Dynamic Enums , Will make working with this class alot easier.
    public class SpriteAnimation
     {
         private Texture2D texture;
@@ -19,7 +20,20 @@ namespace Sage_Engine
         Vector2 location;
         bool animating = true;
         Dictionary<string, FrameAnimation> animations = new Dictionary<string, FrameAnimation>();
+        float rotation = 0;
 
+
+        public float Rotation
+        {
+            get
+            {
+                return rotation;
+            }
+            set
+            {
+                rotation = value % MathHelper.TwoPi;
+            }
+        }
 
         public string CurrentAnimationName
         {
@@ -100,11 +114,20 @@ namespace Sage_Engine
                 return;
             }
 
+            //Might not be wise to put Begin here for everysprite but for now lets leave it here and test.
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, Camera.TransFormMatrix);
-            spriteBatch.Draw(texture, location, anim.CurrentRect, Color.White); // Havent Tester this code yet. Someone Test and get back to me
-            spriteBatch.End();
+            spriteBatch.Draw(texture, 
+                new Rectangle(
+                    (int)location.X, (int)location.Y, CurrentAnimation.CurrentRect.Width, CurrentAnimation.CurrentRect.Height),
+                    anim.CurrentRect, Color.White, Rotation,
+                new Vector2(CurrentAnimation.CurrentRect.Width / 2, CurrentAnimation.CurrentRect.Height / 2), SpriteEffects.None, 0);
+            ///Some Test this Code and tell me.
         }
 
+       /// <summary>
+       /// Copy Constructer
+       /// </summary>
+       /// <param name="anim"></param>
         public SpriteAnimation(SpriteAnimation anim)
         {
             texture = anim.texture;

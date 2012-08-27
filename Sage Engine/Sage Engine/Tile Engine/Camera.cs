@@ -7,9 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sage_Engine
 {
-    public class Camera
+    public static class Camera
     {
-
+        public static int MapWidth;
+        public static int MapHeight;
+    
         //Call this Propety In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world co-ordinates.
         public static Matrix TransFormMatrix
         {
@@ -20,12 +22,29 @@ namespace Sage_Engine
         }
 
 
-        //Set this Camera Postion.
-        public static Vector2 position = Vector2.Zero;
+        
+        private static Vector2 position = Vector2.Zero;
+        
+
+        /// <summary>
+        /// The position of the camera, this method Validates and clapms itself to the map automatically.
+        /// </summary>
+        public static Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                ClampToMap(MapWidth, MapHeight);
+            }
+        }
 
 
 
-        //Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
+        ///Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
         public static void ClampToMap(int Width, int Height)
         {
             if (position.X < 0)

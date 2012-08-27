@@ -59,6 +59,51 @@ namespace Sage_Engine
        public void Addlayer(TileLayer layer)
        {
            Layers.Add(layer);
+           Camera.MapHeight = MapHeight();
+           Camera.MapWidth = MapWidth();
+       }
+
+
+       /// <summary>
+       /// Enter Screen Pixel Co-ordinates to get the index of the tile at the specified co-ordinates.
+       /// -1 if no tile at those co-ordinates or other errors, Checks the top layer first, if Transparent, 
+       /// Checks the layerBelow it for an Index and so on.
+       /// </summary>
+       /// <param name="Pixelx"></param>
+       /// <param name="PixelY"></param>
+       /// <returns></returns>
+       public int TileAtPixel(int Pixelx, int PixelY)
+       {
+           //SomeOne please test this method and give me feedback.(Faraz)
+
+           int lastlayer;
+           if (Layers.Count > 0)
+           {
+                lastlayer = Layers.Count - 1;
+           }
+           else
+           {
+               return -1;
+           }
+
+           
+           int tileX = Pixelx + (int)Camera.Position.X;
+           int tileY = PixelY + (int)Camera.Position.Y;
+
+           tileX = tileX / TileLayer.GetTileWidth;
+           tileY = tileX / TileLayer.GetTileHeight;
+          
+           int Index;
+
+           do
+           {
+               TileLayer layer = Layers[lastlayer];
+               Index = layer.GetCellIndex(tileX, tileY);
+               lastlayer = Layers.Count - 1;
+           }
+           while ((Index == -1) && (lastlayer >= 0));
+
+           return Index;
        }
 
        #endregion

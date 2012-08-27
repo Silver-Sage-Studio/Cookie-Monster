@@ -14,7 +14,6 @@ namespace Sage_Editor
     public partial class Form1 : Form
     {
         SpriteBatch spriteBatch;
-        Camera camera = new Camera();
         TileLayer layer = new TileLayer();
       
 
@@ -84,8 +83,8 @@ namespace Sage_Editor
 
         private void Logic()
         {
-            Camera.position.X = hScrollBar1.Value * TileLayer.GetTileWidth;
-            Camera.position.Y = vScrollBar1.Value * TileLayer.GetTileHeight;
+            Camera.Position = new Vector2(hScrollBar1.Value * TileLayer.GetTileWidth, vScrollBar1.Value * TileLayer.GetTileHeight);
+
         }
 
         private void Render()
@@ -97,7 +96,7 @@ namespace Sage_Editor
         void tileDisplay1_OnInitialise(object sender, EventArgs e)
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            radDraw.Select();
         }
 
         
@@ -123,7 +122,7 @@ namespace Sage_Editor
             LayerList.Enabled = true;
             btnAddLayer.Enabled = true;
             btnRemoveTexture.Enabled = true;
-            btnAddFiles.Enabled = true;
+            btnAddFiles.Enabled = false;
             btnRemoveLayer.Enabled = true;
             TextureList.Enabled = true;
             btnAddTexture.Enabled = true;

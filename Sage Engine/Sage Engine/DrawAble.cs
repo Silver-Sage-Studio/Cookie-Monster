@@ -11,15 +11,20 @@ namespace Sage_Engine
     {
        protected SpriteAnimation spriteAnimation;
        protected Vector2 location; //Location is now always in world Co-ordinates.
-       protected Vector2 speed;
+       protected Vector2 direction;
+       protected float speed;
+       protected float rotation;
 
        protected int CollisonXoffset;
        protected int CollisonYoffset;
 
        protected int collisionRadius;
 
-
-       public Vector2 Speed
+       /// <summary>
+       /// Speed given is pixels moved per second instead of the conventional Pixels moved per frame.
+       /// This gives more constant and accurate scaling from frame to frame.(speed cannot be set to a negative number.
+       /// </summary>
+       public float Speed
        {
            get
            {
@@ -27,12 +32,30 @@ namespace Sage_Engine
            }
            set
            {
-               speed = value;
+               speed = MathHelper.Clamp(value, 0, 50);
+           }
+       }
+
+       /// <summary>
+       /// This Gives the direction vector the sprite is traveling in.
+       /// Will be normalised.(set speed to scale).
+       /// </summary>
+       public Vector2 Direction
+       {
+           get
+           {
+               return direction;
+           }
+           set
+           {
+               direction = value;
+               if(direction != Vector2.Zero)
+                    direction.Normalize();
            }
        }
 
 
-       public int CollisionRadius
+       public virtual int CollisionRadius
        {
            get
            {
@@ -44,7 +67,7 @@ namespace Sage_Engine
            }
        }
 
-       public Rectangle GetCollisionRect
+       public virtual Rectangle GetCollisionRect
        {
            get
            {
@@ -68,6 +91,19 @@ namespace Sage_Engine
            }
        }
 
+       /// <summary>
+       /// Bottom center of sprite, Relative to the top left corner of the sprite.
+       /// </summary>
+       public Vector2 BaseOfSprite
+       {
+           get
+           {
+               return new Vector2(
+                   location.Y + spriteAnimation.CurrentAnimation.CurrentRect.Height,
+                   location.X + (spriteAnimation.CurrentAnimation.CurrentRect.Width / 2));
+           }
+       }
+
 
        public DrawAble(SpriteAnimation spriteAnimation,
            Vector2 location,
@@ -76,7 +112,7 @@ namespace Sage_Engine
        {
            this.spriteAnimation = spriteAnimation;
            this.location = location;
-           this.speed = speed;
+           this.direction = speed;
            this.collisionRadius = collisionRadius;
 
        }
@@ -90,7 +126,7 @@ namespace Sage_Engine
        {
            this.spriteAnimation = spriteAnimation;
            this.location = location;
-           this.speed = speed;
+           this.direction = speed;
            this.collisionRadius = collisionRadius;
            this.CollisonXoffset = collisionXoffset;
            this.CollisonYoffset = collisionYoffset;
@@ -99,7 +135,9 @@ namespace Sage_Engine
        public virtual void Update(GameTime gameTime)
        {
            Movement(gameTime);
+           spriteAnimation.Rotation = rotation;
            spriteAnimation.Update(gameTime, location);
+
        }
 
 
@@ -108,7 +146,12 @@ namespace Sage_Engine
            spriteAnimation.Draw(spriteBatch);
        }
 
-       public abstract void Movement(GameTime gameTime);
+       public virtual void Movement(GameTime gameTime)
+       {
+           float elaspedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+           location += direction * (speed * elaspedTime);
+           
+       }
 
 
        public void AddAnimations(string Key, FrameAnimation Animation)
@@ -131,6 +174,10 @@ namespace Sage_Engine
        {
            spriteAnimation.isAnimating = true;
        }
-       
+
+       public Rectangle CurrentSpriteRect()
+       {
+           return spriteAnimation.CurrentAnimation.CurrentRect;
+       }
     }
 }
