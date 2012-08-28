@@ -243,6 +243,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // chekFill
             // 
@@ -317,6 +318,7 @@
             this.btnAddLayer.TabIndex = 3;
             this.btnAddLayer.Text = "Add Layer";
             this.btnAddLayer.UseVisualStyleBackColor = true;
+            this.btnAddLayer.Click += new System.EventHandler(this.btnAddLayer_Click);
             // 
             // btnAddTexture
             // 
@@ -327,6 +329,7 @@
             this.btnAddTexture.TabIndex = 3;
             this.btnAddTexture.Text = "Add Texture";
             this.btnAddTexture.UseVisualStyleBackColor = true;
+            this.btnAddTexture.Click += new System.EventHandler(this.btnAddTexture_Click);
             // 
             // LayerList
             // 
@@ -336,6 +339,7 @@
             this.LayerList.Name = "LayerList";
             this.LayerList.Size = new System.Drawing.Size(278, 82);
             this.LayerList.TabIndex = 2;
+            this.LayerList.SelectedIndexChanged += new System.EventHandler(this.LayerList_SelectedIndexChanged);
             // 
             // TextureList
             // 
@@ -345,6 +349,7 @@
             this.TextureList.Name = "TextureList";
             this.TextureList.Size = new System.Drawing.Size(278, 82);
             this.TextureList.TabIndex = 2;
+            this.TextureList.SelectedIndexChanged += new System.EventHandler(this.TextureList_SelectedIndexChanged);
             // 
             // texPathAddress
             // 

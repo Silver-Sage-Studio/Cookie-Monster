@@ -9,13 +9,21 @@ namespace Sage_Engine
 {
    public class TileMap
     {
-       List<TileLayer> Layers = new List<TileLayer>();
+       List<TileLayer> layers = new List<TileLayer>();
 
-      
+
+       public List<TileLayer> Layers
+       {
+           get
+           {
+               return layers;
+           }
+       }
+
 
        public void Draw(SpriteBatch spriteBatch)
        {
-           foreach (TileLayer layer in Layers)
+           foreach (TileLayer layer in layers)
            {
                layer.Draw(spriteBatch);
            }
@@ -32,7 +40,7 @@ namespace Sage_Engine
        public int MapWidth()
        {
            int max = -10;
-           foreach (TileLayer layer in Layers)
+           foreach (TileLayer layer in layers)
            {
                max = Math.Max(layer.LayerWidthinTiles, max);
            }
@@ -47,7 +55,7 @@ namespace Sage_Engine
        public int MapHeight()
        {
            int max = -10;
-           foreach (TileLayer layer in Layers)
+           foreach (TileLayer layer in layers)
            {
                max = Math.Max(layer.LayerHeightinTiles, max);
            }
@@ -58,7 +66,7 @@ namespace Sage_Engine
 
        public void Addlayer(TileLayer layer)
        {
-           Layers.Add(layer);
+           layers.Add(layer);
            Camera.MapHeight = MapHeight();
            Camera.MapWidth = MapWidth();
        }
@@ -77,9 +85,9 @@ namespace Sage_Engine
            //SomeOne please test this method and give me feedback.(Faraz)
 
            int lastlayer;
-           if (Layers.Count > 0)
+           if (layers.Count > 0)
            {
-                lastlayer = Layers.Count - 1;
+                lastlayer = layers.Count - 1;
            }
            else
            {
@@ -97,9 +105,9 @@ namespace Sage_Engine
 
            do
            {
-               TileLayer layer = Layers[lastlayer];
+               TileLayer layer = layers[lastlayer];
                Index = layer.GetCellIndex(tileX, tileY);
-               lastlayer = Layers.Count - 1;
+               lastlayer = layers.Count - 1;
            }
            while ((Index == -1) && (lastlayer >= 0));
 

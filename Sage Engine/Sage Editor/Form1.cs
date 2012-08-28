@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Sage_Engine;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,18 +14,18 @@ namespace Sage_Editor
     using Image = System.Drawing.Image;
     public partial class Form1 : Form
     {
-        SpriteBatch spriteBatch;
-        TileLayer layer = new TileLayer();
-      
+        public SpriteBatch spriteBatch;
 
+        public Texture2D EmptyTile;
+
+        public Dictionary<string, Texture2D> dictTextures = new Dictionary<string, Texture2D>();
+        public Dictionary<string, Image> dictImages = new Dictionary<string, Image>();
+        public Dictionary<string, TileLayer> dictLayer = new Dictionary<string,TileLayer>();
 
         public TileMap Map = new TileMap();
+        public TileLayer currentLayer;
 
-        public Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
-        public Dictionary<string, Image> Images = new Dictionary<string, Image>();
-
-
-        public GraphicsDevice GraphicsDevice
+        public GraphicsDevice GraphicsDevices
         {
             get
             {
@@ -43,24 +44,10 @@ namespace Sage_Editor
             Application.Idle += delegate { tileDisplay1.Invalidate(); };
             Application.Idle += delegate { vScrollBar1.Invalidate(); };
 
-
-            if (layer.LayerWidthInPixels >= tileDisplay1.Width)
+           
+            while (string.IsNullOrEmpty(texPathAddress.Text))
             {
-                hScrollBar1.Visible = true;
-                hScrollBar1.Minimum = 0;
-                hScrollBar1.Maximum = layer.LayerWidthinTiles; 
-            }
-
-            if (layer.LayerHeightinTiles >= tileDisplay1.Height)
-            {
-                vScrollBar1.Visible = true;
-                vScrollBar1.Minimum = 0;
-                vScrollBar1.Maximum = layer.LayerHeightinTiles;
-            }
-
-            while(string.IsNullOrEmpty(texPathAddress.Text))
-            {
-                if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
                     texPathAddress.Text = folderBrowserDialog1.SelectedPath;
                     activateControls();
@@ -74,29 +61,102 @@ namespace Sage_Editor
             
         }
 
-        void tileDisplay1_OnDraw(object sender, EventArgs e)
+       public void tileDisplay1_OnDraw(object sender, EventArgs e)
         {
-            vScrollBar1.Location = new System.Drawing.Point(tileDisplay1.Location.X + tileDisplay1.Size.Width, vScrollBar1.Location.Y); 
+            vScrollBar1.Location = new System.Drawing.Point(tileDisplay1.Location.X + tileDisplay1.Size.Width, vScrollBar1.Location.Y);
             Logic();
             Render();
+            
         }
 
-        private void Logic()
-        {
-            Camera.Position = new Vector2(hScrollBar1.Value * TileLayer.GetTileWidth, vScrollBar1.Value * TileLayer.GetTileHeight);
+       void Form1_MouseWheel(object sender, MouseEventArgs e)
+       {
 
-        }
+           
+           if (e.Delta >= 0)
+           {
+                   int x = e.Delta % 120;
+                   x++;
+                   vScrollBar1.Value -= x;
+               
+           }
+           else
+           {
+               
+               int x = e.Delta % 120;
+                   x++;
+                   vScrollBar1.Value += x;
+           
+           }
+           
+       }
+
+       private void Logic()
+       {
+           Camera.Position = new Vector2(hScrollBar1.Value * 4, vScrollBar1.Value * 4);
+
+           if (currentLayer != null)
+           {
+               if (currentLayer.LayerWidthInPixels >= tileDisplay1.Width)
+               {
+                   hScrollBar1.Visible = true;
+                   hScrollBar1.Minimum = 0;
+                   hScrollBar1.Maximum = (int)Math.Ceiling((currentLayer.LayerWidthinTiles * TileLayer.GetTileWidth) * 0.25);
+               }
+
+               if (currentLayer.LayerHeightInPixels >= tileDisplay1.Height)
+               {
+                   vScrollBar1.Visible = true;
+                   vScrollBar1.Minimum = 0;
+                   vScrollBar1.Maximum = (int)Math.Ceiling((currentLayer.LayerHeightinTiles * TileLayer.GetTileHeight) * 0.25);
+               }
+           }
+       }
+       
+
+
+     
+      
 
         private void Render()
         {
-            GraphicsDevice.Clear(Color.Black);
-            layer.Draw(spriteBatch);
+            GraphicsDevices.Clear(Color.Black);
+            
+            DrawLayers();
         }
+
+
+        private void DrawLayers()
+        {
+            //if (currentLayer == null)
+            //    return;
+
+            foreach (TileLayer layer in Map.Layers)
+            {
+                if (layer == null)
+                    return;
+                layer.Draw(spriteBatch);
+
+                DrawEmptyTiles.DrawTiles();
+
+                if (layer == currentLayer)
+                    break;
+            }
+        }
+            
 
         void tileDisplay1_OnInitialise(object sender, EventArgs e)
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevices);
+            using( FileStream stream = new FileStream(@"Content/tile.png", FileMode.Open))
+            {
+                EmptyTile = Texture2D.FromStream(GraphicsDevices, stream);
+            }
             radDraw.Select();
+            DrawEmptyTiles.Initialise(this);
+
+            Mouse.WindowHandle = tileDisplay1.Handle;
+            MouseWheel += new MouseEventHandler(Form1_MouseWheel);
         }
 
         
@@ -135,7 +195,245 @@ namespace Sage_Editor
             Application.Exit();
         }
 
-    
+        private void btnAddLayer_Click(object sender, EventArgs e)
+        {
+            string layerName;
+            int layerWidth;
+            int layerHeight;
+            TileLayer layer;
+
+            LayerForm Form = new LayerForm();
+            Form.ShowDialog();
+
+            if (Form.OkPressed)
+            {
+                layerName = Form.txtLayerName.Text;
+                layerWidth = int.Parse(Form.txtLayrWidth.Text);
+                layerHeight = int.Parse(Form.txtLayHeight.Text);
+                layer = new TileLayer(layerWidth, layerHeight);
+                dictLayer.Add(layerName, layer);
+                LayerList.Items.Add(layerName);
+                Map.Addlayer(layer);
+                currentLayer = layer;
+                LayerList.SetSelected(LayerList.Items.Count - 1, true);
+            }
+            
+        }
+
+        private void LayerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string CurrentList = LayerList.SelectedItem.ToString();
+            currentLayer = dictLayer[CurrentList];
+        }
+
+        private void btnAddTexture_Click(object sender, EventArgs e)
+        {
+            if (currentLayer != null)
+            {
+                string[] Paths;
+                openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg";
+
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+
+                    Paths = openFileDialog1.FileNames;
+
+                    foreach (string path in Paths)
+                    {
+                        FileStream stream = new FileStream(path, FileMode.Open);
+
+
+                        Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
+                        Image img = Image.FromStream(stream);
+
+                        
+
+
+
+                        +++
+                            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            0..
+                        
+
+                        string[] FileNames = path.Split('\\');
+                        string FileName = FileNames[FileNames.Length - 1];
+                        string[] tmpFileName = FileName.Split('.');
+                        string FileNameMod = tmpFileName[0];
+
+                        Console.WriteLine(FileNameMod);
+                       
+
+
+                        currentLayer.AddTexture(text);
+                        dictTextures[FileNameMod] = text;
+                        dictImages[FileNameMod] = img;
+
+                        TextureList.Items.Add(FileNameMod);
+                       
+                        stream.Dispose();
+
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select A Layer First Please");
+            }
+            
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextureList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pictureBox1.BackgroundImage = dictImages[TextureList.SelectedItem.ToString()];
+        }
+
+ 
 
     }
 }

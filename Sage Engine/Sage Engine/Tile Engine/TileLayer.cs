@@ -53,7 +53,9 @@ namespace Sage_Engine
        }
 
        
-
+       /// <summary>
+       /// Set the Tile Height of the Map, validation is done in property.
+       /// </summary>
        public static int SetTileHeight
        {
            set
