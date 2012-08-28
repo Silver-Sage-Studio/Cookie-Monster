@@ -22,3 +22,5 @@ C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debu
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.pdb
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.LayerForm.resources
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\tile.png
+C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.LayerForm.resources
+C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\tile.png

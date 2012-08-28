@@ -230,172 +230,25 @@ namespace Sage_Editor
         {
             if (currentLayer != null)
             {
-                string[] Paths;
-                openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg";
+                string Path;
+                openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg|Jpg|*.jpg";
 
 
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
 
-                    Paths = openFileDialog1.FileNames;
+                    Path = openFileDialog1.FileName;
 
-                    foreach (string path in Paths)
-                    {
-                        FileStream stream = new FileStream(path, FileMode.Open);
+                   
+                        FileStream stream = new FileStream(Path, FileMode.Open);
 
 
                         Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
                         Image img = Image.FromStream(stream);
-
                         
 
-
-
-                        +++
-                            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            0..
                         
-
-                        string[] FileNames = path.Split('\\');
+                        string[] FileNames = Path.Split('\\');
                         string FileName = FileNames[FileNames.Length - 1];
                         string[] tmpFileName = FileName.Split('.');
                         string FileNameMod = tmpFileName[0];
@@ -403,7 +256,7 @@ namespace Sage_Editor
                         Console.WriteLine(FileNameMod);
                        
 
-
+                      
                         currentLayer.AddTexture(text);
                         dictTextures[FileNameMod] = text;
                         dictImages[FileNameMod] = img;
@@ -412,7 +265,7 @@ namespace Sage_Editor
                        
                         stream.Dispose();
 
-                    }
+                    
 
                 }
             }
@@ -423,14 +276,16 @@ namespace Sage_Editor
             
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TextureList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pictureBox1.BackgroundImage = dictImages[TextureList.SelectedItem.ToString()];
+            pictureBox1.Image = dictImages[TextureList.SelectedItem as string];
+        }
+
+        private void btnRemoveTexture_Click(object sender, EventArgs e)
+        {
+            //Image i = Image.FromFile("D:\\silver sages\\Bull shit\\XNAGifAnimationv1.9D\\GifAnimationSample\\GifAnimationSampleContent\\texture1.jpg");
+            //pictureBox1.Image = i;
         }
 
  
