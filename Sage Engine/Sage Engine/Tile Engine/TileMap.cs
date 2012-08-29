@@ -67,8 +67,8 @@ namespace Sage_Engine
        public void Addlayer(TileLayer layer)
        {
            layers.Add(layer);
-           Camera.MapHeight = MapHeight();
-           Camera.MapWidth = MapWidth();
+           Camera.MapHeight = MapHeight() * TileLayer.GetTileHeight;
+           Camera.MapWidth = MapWidth() * TileLayer.GetTileWidth;
        }
 
 

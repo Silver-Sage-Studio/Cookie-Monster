@@ -22,3 +22,8 @@ C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineT
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture1.xnb
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture2.xnb
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture8.xnb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Sprites\mnt2.xnb
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture0.jpg
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture1.jpg
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture2.jpg
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture8.jpg

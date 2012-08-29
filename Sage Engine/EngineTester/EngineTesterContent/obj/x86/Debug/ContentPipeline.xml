@@ -37,6 +37,15 @@
       <Output>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture8.xnb</Output>
       <Time>2012-08-29T05:44:21.8103723+05:00</Time>
     </Item>
+    <Item>
+      <Source>Sprites\mnt2.png</Source>
+      <Name>Sprites\mnt2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Sprites\mnt2.xnb</Output>
+      <Time>2012-08-30T01:00:07.8717144+05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

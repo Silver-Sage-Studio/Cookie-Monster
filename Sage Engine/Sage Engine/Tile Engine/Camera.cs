@@ -11,6 +11,35 @@ namespace Sage_Engine
     {
         public static int MapWidth;
         public static int MapHeight;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
+        static bool Set = false;
+
+        /// <summary>
+        /// Call this method before trying to use the camera class or wont clamp properly.
+        /// Needs ViewPorts width and height.
+        /// </summary>
+        /// <param name="screenWidth"></param>
+        /// <param name="screenHeight"></param>
+        public static void Initialise(int screenWidth, int screenHeight)
+        {
+            ScreenWidth = screenWidth;
+            ScreenHeight = screenHeight;
+            Set = true;
+        }
+        /// <summary>
+        /// Call this method before trying to use the camera class or wont clamp properly.
+        /// Needs the graphics device so it can access viewport width and height.
+        /// </summary>
+        /// <param name="graphicsDevice"></param>
+        public static void Initialise(GraphicsDevice graphicsDevice)
+        {
+            ScreenWidth = graphicsDevice.Viewport.Width;
+            ScreenHeight = graphicsDevice.Viewport.Height;
+            Set = true;
+        }
+
+
     
         //Call this Propety In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world co-ordinates.
         public static Matrix TransFormMatrix
@@ -38,7 +67,9 @@ namespace Sage_Engine
             set
             {
                 position = value;
-                ClampToMap(MapWidth, MapHeight);
+                if(Set)
+                    ClampToMap(MapWidth, MapHeight);
+               
             }
         }
 
@@ -47,21 +78,21 @@ namespace Sage_Engine
         ///Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
         public static void ClampToMap(int Width, int Height)
         {
-            if (position.X < 0)
+            if (position.X <= 0)
             {
                 position.X = 0;
             }
-            if (position.Y < 0)
+            if (position.Y <= 0)
             {
                 position.Y = 0;
             }
-            if (position.X > Width)
+            if (position.X >= Width-ScreenWidth)
             {
-                position.X = Width;
+                position.X = Width-ScreenWidth;
             }
-            if (position.Y > Height)
+            if (position.Y >= Height- ScreenHeight)
             {
-                position.Y = Height;
+                position.Y = Height - ScreenHeight;
             }
         }
 

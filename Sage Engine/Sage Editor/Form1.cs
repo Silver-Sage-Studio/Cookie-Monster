@@ -73,21 +73,21 @@ namespace Sage_Editor
        {
 
            
-           if (e.Delta >= 0)
+           if (e.Delta > 0)
            {
-                   int x = e.Delta % 119;
-                   x++;
-                   vScrollBar1.Value -= x;
+               int x = e.Delta % 119;
+               vScrollBar1.Value -= x;
+              
+
                
            }
            else
            {
-               
                int x = e.Delta % 119;
-                   x++;
-                   vScrollBar1.Value += x;
-           
+               vScrollBar1.Value -= x;
+                 
            }
+           Console.WriteLine(e.Delta);
            
        }
 
@@ -157,6 +157,8 @@ namespace Sage_Editor
 
             Mouse.WindowHandle = tileDisplay1.Handle;
             MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+            this.Focus();
+            //Camera.Initialise(GraphicsDevices);
         }
 
         
