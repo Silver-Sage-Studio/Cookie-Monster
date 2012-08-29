@@ -20,8 +20,19 @@ namespace Sage_Editor
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            OkPressed = true;
-            Close();
+            int width;
+            int height;
+            if ((int.TryParse(txtLayrWidth.Text, out width)) && int.TryParse(txtLayHeight.Text, out height)
+                && (width >= 1) && (height >= 1))
+            {
+                
+                OkPressed = true;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Pleae Enter Valid Numbers in Width and Height \r\nmake sure the number is not negative");
+            }
         }
 
         private void BtnClose_Click(object sender, EventArgs e)

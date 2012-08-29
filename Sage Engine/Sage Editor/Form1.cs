@@ -75,7 +75,7 @@ namespace Sage_Editor
            
            if (e.Delta >= 0)
            {
-                   int x = e.Delta % 120;
+                   int x = e.Delta % 119;
                    x++;
                    vScrollBar1.Value -= x;
                
@@ -83,7 +83,7 @@ namespace Sage_Editor
            else
            {
                
-               int x = e.Delta % 120;
+               int x = e.Delta % 119;
                    x++;
                    vScrollBar1.Value += x;
            
@@ -239,31 +239,31 @@ namespace Sage_Editor
 
                     Path = openFileDialog1.FileName;
 
-                   
-                        FileStream stream = new FileStream(Path, FileMode.Open);
+                    FileStream stream = new FileStream(Path, FileMode.Open);
 
-
-                        Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
-                        Image img = Image.FromStream(stream);
+                    Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
+                    Image img = Image.FromStream(stream);
                         
+                    string[] FileNames = Path.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string[] tmpFileName = FileName.Split('.');
+                    string FileNameMod = tmpFileName[0];
+  
+                    currentLayer.AddTexture(text);
+                    foreach (TileLayer layer in Map.Layers)
+                    {
+                        if (layer.HasTexture(text) == -1)
+                        {
+                            layer.AddTexture(text);
+                        }
+                    }
 
-                        
-                        string[] FileNames = Path.Split('\\');
-                        string FileName = FileNames[FileNames.Length - 1];
-                        string[] tmpFileName = FileName.Split('.');
-                        string FileNameMod = tmpFileName[0];
+                    dictTextures[FileNameMod] = text;
+                    dictImages[FileNameMod] = img;
 
-                        Console.WriteLine(FileNameMod);
+                    TextureList.Items.Add(FileNameMod);
                        
-
-                      
-                        currentLayer.AddTexture(text);
-                        dictTextures[FileNameMod] = text;
-                        dictImages[FileNameMod] = img;
-
-                        TextureList.Items.Add(FileNameMod);
-                       
-                        stream.Dispose();
+                    stream.Dispose();
 
                     
 
