@@ -8,6 +8,7 @@ namespace Sage_Editor
     public enum Commands
     {
         SetTileCommand,
+        FillCellIndex,
     }
 
    public static class CommandFactory

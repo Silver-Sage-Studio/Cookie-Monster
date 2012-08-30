@@ -11,8 +11,10 @@ namespace Sage_Editor
 {
     public partial class LayerForm : Form
     {
-        public LayerForm()
+        int LayerCount;
+        public LayerForm(int LayerCount)
         {
+            this.LayerCount = LayerCount;
             InitializeComponent();
         }
 
@@ -40,6 +42,15 @@ namespace Sage_Editor
             OkPressed = false;
             Close();
 
+        }
+
+    
+
+        private void LayerForm_Load(object sender, EventArgs e)
+        {
+            txtLayerName.Text = "Layer" + (LayerCount+1); 
+            txtLayHeight.Text = "" + 100;
+            txtLayrWidth.Text = "" + 100;
         }
 
         

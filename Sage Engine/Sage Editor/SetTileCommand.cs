@@ -5,6 +5,7 @@ using System.Text;
 using Sage_Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Windows.Forms;
 
 namespace Sage_Editor
 {
@@ -41,12 +42,28 @@ namespace Sage_Editor
             }
         }
 
+
+
         public override void Undo()
         {
-            form.currentLayer = this.layer;
-            layer.SetCellIndex((int)TileLocation.X, (int)TileLocation.Y, this.PreviousTexture);
-        }
 
+            if (!(form.currentLayer.Equals(null)))
+            {
+                form.currentLayer = this.layer;
+                layer.SetCellIndex((int)TileLocation.X, (int)TileLocation.Y, this.PreviousTexture);
+              
+                string key = "";
+                foreach (KeyValuePair<string, TileLayer> KeyVal in form.dictLayer)
+                {
+                    if (KeyVal.Value == layer)
+                    {
+                        key = KeyVal.Key;
+                    }
+                }
+
+                form.LayerList.SelectedItem = key;
+            }
+        }
         public override Command Clone()
         {
             return new SetTileCommand(this.form);

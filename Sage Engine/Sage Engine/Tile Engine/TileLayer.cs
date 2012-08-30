@@ -31,6 +31,20 @@ namespace Sage_Engine
 
        //Setter and getter for Alpha Transparecnt value of the layer.
        //Alpha can only be between 0.0 and 1.0f , Where 0.0f is Full Transparency/ Blending and 1.0 is no blending.
+
+       public List<Texture2D> TexturesList {
+           get {
+               return this.TexturesList;
+           }
+       }
+
+       public int[,] TileMapArray{
+          get
+          {
+              return this.TileMapArray;
+          }
+   }
+       
        public float Alpha 
        {
            get

@@ -124,6 +124,7 @@
             this.Controls.Add(this.btnAdd);
             this.Name = "LayerForm";
             this.Text = "Add New Layer";
+            this.Load += new System.EventHandler(this.LayerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

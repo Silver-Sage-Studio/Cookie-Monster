@@ -500,7 +500,7 @@
         private System.Windows.Forms.Button btnRemoveTexture;
         private System.Windows.Forms.Button btnAddLayer;
         private System.Windows.Forms.Button btnAddTexture;
-        private System.Windows.Forms.ListBox LayerList;
+        public  System.Windows.Forms.ListBox LayerList;
         public System.Windows.Forms.ListBox TextureList;
         private System.Windows.Forms.TextBox texPathAddress;
         private System.Windows.Forms.PictureBox pictureBox1;
