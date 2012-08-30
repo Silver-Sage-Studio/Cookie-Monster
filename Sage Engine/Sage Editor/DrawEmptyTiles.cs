@@ -36,5 +36,20 @@ namespace Sage_Editor
            }
            form.spriteBatch.End();
        }
+
+       public static void DrawSelectedTile()
+       {
+           form.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, Camera.TransFormMatrix);
+
+           if ((form.TileX != null) && (form.TileY != null))
+           {
+               
+               form.spriteBatch.Draw(EmptyTileTexture, new Rectangle(
+                 (int)form.TileX * TileLayer.GetTileWidth, (int)form.TileY * TileLayer.GetTileHeight, TileLayer.GetTileWidth, TileLayer.GetTileHeight),
+                  SelectedColor);
+
+           }
+           form.spriteBatch.End();
+       }
     }
 }

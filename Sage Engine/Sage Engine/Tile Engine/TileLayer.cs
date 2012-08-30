@@ -276,6 +276,37 @@ namespace Sage_Engine
            }
        }
 
+
+       /// <summary>
+       /// Get The Tile at the current Screen Pixels Co-Ordinates. 
+       /// null if the pixels are out of the layers width and height.
+       /// </summary>
+       /// <param name="PixelX"></param>
+       /// <param name="PixelY"></param>
+       /// <returns></returns>
+       public Vector2? GetTileAtPixels(int PixelX, int PixelY)
+       {
+           
+           Vector2 pos = Camera.Position;
+           Vector2 ans;
+           ans.X = (PixelX+pos.X) / TileLayer.TileWidth;
+           ans.Y = (PixelY + pos.Y) / TileLayer.TileHeight;
+           if (ans.X > this.LayerWidthinTiles || ans.Y > this.LayerHeightinTiles)
+               return null;
+           else
+               return ans;
+       }
+
+       /// <summary>
+       /// Get The Tile at the current Screen Pixels Co-Ordinates. 
+       /// null if the pixels are out of the layers width and height.
+       /// </summary>
+       /// <param name="Pixels"></param>
+       /// <returns></returns>
+       public Vector2? GetTileAtPixels(Vector2 Pixels)
+       {
+           return GetTileAtPixels((int)Pixels.X, (int)Pixels.Y);
+       }
        #endregion
 
    }

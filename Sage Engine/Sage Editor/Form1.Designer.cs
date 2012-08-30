@@ -85,6 +85,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -105,31 +106,31 @@
             this.saveAllLayerToolStripMenuItem,
             this.loadLayerToolStripMenuItem});
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
-            this.layerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.layerToolStripMenuItem.Text = "Layer";
             // 
             // saveLayerToolStripMenuItem
             // 
             this.saveLayerToolStripMenuItem.Name = "saveLayerToolStripMenuItem";
-            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveLayerToolStripMenuItem.Text = "Save Layer";
             // 
             // saveAsLayerToolStripMenuItem
             // 
             this.saveAsLayerToolStripMenuItem.Name = "saveAsLayerToolStripMenuItem";
-            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsLayerToolStripMenuItem.Text = "SaveAs Layer";
             // 
             // saveAllLayerToolStripMenuItem
             // 
             this.saveAllLayerToolStripMenuItem.Name = "saveAllLayerToolStripMenuItem";
-            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAllLayerToolStripMenuItem.Text = "Save All Layer";
             // 
             // loadLayerToolStripMenuItem
             // 
             this.loadLayerToolStripMenuItem.Name = "loadLayerToolStripMenuItem";
-            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.loadLayerToolStripMenuItem.Text = "Load Layer";
             // 
             // mapToolStripMenuItem
@@ -139,7 +140,7 @@
             this.saveAsMapToolStripMenuItem,
             this.loadMapToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.mapToolStripMenuItem.Text = "Map";
             // 
             // saveMapToolStripMenuItem
@@ -167,31 +168,31 @@
             this.saveAsLevelToolStripMenuItem,
             this.loadLevelToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // saveLevelToolStripMenuItem
             // 
             this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
-            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.saveLevelToolStripMenuItem.Text = "Save Level";
             // 
             // saveAsLevelToolStripMenuItem
             // 
             this.saveAsLevelToolStripMenuItem.Name = "saveAsLevelToolStripMenuItem";
-            this.saveAsLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsLevelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.saveAsLevelToolStripMenuItem.Text = "SaveAs Level";
             // 
             // loadLevelToolStripMenuItem
             // 
             this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
-            this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.loadLevelToolStripMenuItem.Text = "Load Level";
             // 
             // exitBitchesToolStripMenuItem
             // 
             this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
             // 
@@ -297,6 +298,7 @@
             this.btnRemoveLayer.TabIndex = 4;
             this.btnRemoveLayer.Text = "Remove Layer";
             this.btnRemoveLayer.UseVisualStyleBackColor = true;
+            this.btnRemoveLayer.Click += new System.EventHandler(this.btnRemoveLayer_Click);
             // 
             // btnRemoveTexture
             // 
@@ -411,7 +413,7 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(682, 27);
+            this.vScrollBar1.Location = new System.Drawing.Point(687, 25);
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(17, 633);
             this.vScrollBar1.TabIndex = 3;
@@ -499,7 +501,7 @@
         private System.Windows.Forms.Button btnAddLayer;
         private System.Windows.Forms.Button btnAddTexture;
         private System.Windows.Forms.ListBox LayerList;
-        private System.Windows.Forms.ListBox TextureList;
+        public System.Windows.Forms.ListBox TextureList;
         private System.Windows.Forms.TextBox texPathAddress;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox chekFill;

@@ -86,11 +86,11 @@ namespace Sage_Engine
             {
                 position.Y = 0;
             }
-            if (position.X >= Width-ScreenWidth)
+            if( (Width > ScreenWidth) && (position.X >= Width - ScreenWidth))
             {
-                position.X = Width-ScreenWidth;
+                position.X = Width - ScreenWidth;
             }
-            if (position.Y >= Height- ScreenHeight)
+            if( (Height > ScreenHeight) && (position.Y >= Height - ScreenHeight))
             {
                 position.Y = Height - ScreenHeight;
             }
