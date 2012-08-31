@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Sage_Engine;
-using System.Collections;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sage_Editor
 {
-    public class FillCellUndo : Command
+   public class FillCellErase : Command
     {
         public TileLayer currentLayer;
         public TileLayer LayerStateBeforeRecursion;
@@ -47,7 +46,7 @@ namespace Sage_Editor
         }
 
 
-        public FillCellUndo(Form1 form)
+        public FillCellErase(Form1 form)
             : base(form)
         {
             this.currentLayer = form.currentLayer;
@@ -64,7 +63,7 @@ namespace Sage_Editor
                 }
 
                 fillCounter = 5000;
-                FillCellIndex((int)form.TileX, (int)form.TileY, currentLayer.HasTexture(form.dictTextures[form.TextureList.SelectedItem as string]));
+                FillCellIndex((int)form.TileX, (int)form.TileY, -1);
             }
         }
 
@@ -134,5 +133,6 @@ namespace Sage_Editor
                 return false;
             }
         }
+
     }
 }

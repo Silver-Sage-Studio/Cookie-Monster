@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sage_Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Windows.Forms;
+using Sage_Engine;
 
 namespace Sage_Editor
 {
-   public class SetTileCommand  : Command
+   public class EraseCellCommand : Command
     {
         public int PreviousTexture;
         protected TileLayer layer;
         public Vector2 TileLocation;
 
-       public SetTileCommand(Form1 form)
+        public EraseCellCommand(Form1 form)
            :base(form)
        {
        }
@@ -23,7 +22,7 @@ namespace Sage_Editor
         public override void Excute()
         {
             TileLayer currentLayer = this.form.currentLayer;
-            if(form.TextureList.Items.Count>0 && form.TextureList.SelectedItem!=null){
+          
                 if ((this.form.TileX != null) || (this.form.TileY != null))
                 {
                     int TileX = (int)this.form.TileX;
@@ -33,13 +32,10 @@ namespace Sage_Editor
                     this.layer = currentLayer;
                     this.PreviousTexture = currentLayer.GetCellIndex(TileX, TileY);
 
-                    string TextureToSet = form.TextureList.SelectedItem.ToString();
-
-                    Texture2D text = form.dictTextures[TextureToSet];
-                    int IndexToSet = currentLayer.HasTexture(text);
+                    int IndexToSet = -1;
                     currentLayer.SetCellIndex(TileX, TileY, IndexToSet);
                 }
-            }
+            
         }
 
         public override void Undo()
@@ -65,14 +61,14 @@ namespace Sage_Editor
         }
         public override Command Clone()
         {
-            return new SetTileCommand(this.form);
+            return new EraseCellCommand(this.form);
         }
 
         public override bool CompareTo(Command commandToCompare)
         {
-            if (commandToCompare is SetTileCommand)
-            { 
-                SetTileCommand commandComaparer = commandToCompare as SetTileCommand;
+            if (commandToCompare is EraseCellCommand)
+            {
+                EraseCellCommand commandComaparer = commandToCompare as EraseCellCommand;
                 if( (commandComaparer.TileLocation == this.TileLocation) && (commandComaparer.PreviousTexture == this.PreviousTexture) )
                 {
                     return true; // Same Object
@@ -85,5 +81,7 @@ namespace Sage_Editor
                 return false;
             }
         }
+
+
     }
 }

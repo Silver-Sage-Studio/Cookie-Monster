@@ -67,6 +67,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DrawEmptyTiles.cs" />
+    <Compile Include="EraseCellCommand.cs" />
+    <Compile Include="FillCellErase.cs" />
     <Compile Include="FillCellUndo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

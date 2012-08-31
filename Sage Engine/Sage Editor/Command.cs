@@ -22,6 +22,8 @@ namespace Sage_Editor
        public abstract void Undo();
 
        public abstract Command Clone();
+
+       public abstract bool CompareTo(Command commandToCompare);
       
        
     }

@@ -29,6 +29,7 @@ namespace Sage_Editor
         public TileLayer currentLayer;
 
        public Stack<Command> ExcutedCommands = new Stack<Command>();
+       public Command PreviousCommand = null;
 
 
         int? mouseX = null;
@@ -37,7 +38,7 @@ namespace Sage_Editor
         public int? TileX = null;
         public int? TileY = null;
         bool Hovering;
-        private int fillCounter = 5000;
+        
 
         #endregion
 
@@ -174,8 +175,6 @@ namespace Sage_Editor
 
         }
 
-
-
         #endregion
 
         #region Logic
@@ -226,30 +225,60 @@ namespace Sage_Editor
             MouseButtonClicked();
         }
 
+        private void ExcuteCommands(Command command)
+        {
+            if (PreviousCommand == null)
+            {
+                PreviousCommand = command;
+            }
+            else
+            {
+                command.Excute();
+                if (!command.CompareTo(PreviousCommand))
+                {
+                    
+                    ExcutedCommands.Push(command);
+                }
+            }
+            PreviousCommand = command;
+        }
+
         private void MouseButtonClicked()
         {
             if (mouseClickCount > 2)
             {
-
                 MouseState mouse = Mouse.GetState();
 
                 if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                 {
                     if (TileX != null || TileY != null)
                     {
+                        
                         if (chekFill.Checked)
                         {
-                            fillCounter = 5000;
-                            Texture2D text = dictTextures[TextureList.SelectedItem as string];
-                            int index = currentLayer.HasTexture(text);
-                            FillCellIndex((int)TileX, (int)TileY, index);
+                            if (radDraw.Checked)
+                            {
+                                Command command = CommandFactory.Execute(Commands.FillCellIndex);
+                                ExcuteCommands(command);
+                            }
+                            else
+                            {
+                                Command command = CommandFactory.Execute(Commands.FillCellErase);
+                                ExcuteCommands(command);
+                            }
                         }
-                        else
+                        else 
                         {
-                            Command command = CommandFactory.Execute(Commands.SetTileCommand);
-                            command.Excute();
-                            ExcutedCommands.Push(command);
-
+                            if (radDraw.Checked)
+                            {
+                                Command command = CommandFactory.Execute(Commands.SetTileCommand);
+                                ExcuteCommands(command);
+                            }
+                            else
+                            {
+                                Command command = CommandFactory.Execute(Commands.EraseCellCommand);
+                                ExcuteCommands(command);
+                            }
                         }
                     }
                 }
@@ -335,6 +364,10 @@ namespace Sage_Editor
                 LayerList.Items.Add(layerName);
                 Map.Addlayer(layer);
                 currentLayer = layer;
+                foreach (string s in TextureList.Items)
+                {
+                    currentLayer.AddTexture(dictTextures[s]);
+                }
                 LayerList.SetSelected(LayerList.Items.Count - 1, true);
             }
 
@@ -354,10 +387,8 @@ namespace Sage_Editor
                 string Path;
                 openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg|Jpg|*.jpg";
 
-
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-
                     Path = openFileDialog1.FileName;
 
                     FileStream stream = new FileStream(Path, FileMode.Open);
@@ -378,7 +409,6 @@ namespace Sage_Editor
                             layer.AddTexture(text);
                         }
                     }
-
                     dictTextures[FileNameMod] = text;
                     dictImages[FileNameMod] = img;
 
@@ -390,7 +420,6 @@ namespace Sage_Editor
             {
                 MessageBox.Show("Select A Layer First Please");
             }
-
         }
 
 
@@ -402,11 +431,7 @@ namespace Sage_Editor
 
         private void btnRemoveTexture_Click(object sender, EventArgs e)
         {
-            if (ExcutedCommands.Count > 0)
-            {
-                Command cmd = ExcutedCommands.Pop();
-                cmd.Undo();
-            }
+            
         }
 
         private void btnRemoveLayer_Click(object sender, EventArgs e)

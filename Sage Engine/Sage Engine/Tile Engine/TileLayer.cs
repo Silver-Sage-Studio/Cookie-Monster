@@ -12,7 +12,6 @@ namespace Sage_Engine
     
    public class TileLayer
    {
-
        #region Variables
 
        int[,] layer;
@@ -34,16 +33,22 @@ namespace Sage_Engine
 
        public List<Texture2D> TexturesList {
            get {
-               return this.TexturesList;
+               return this.textureList;
+              
            }
        }
 
-       public int[,] TileMapArray{
-          get
-          {
-              return this.TileMapArray;
-          }
-   }
+       public int[,] TileMapArray
+       {
+           get
+           {
+               return this.layer;
+           }
+           set
+           {
+               layer = (int[,])value.Clone();
+           }
+       }
        
        public float Alpha 
        {
