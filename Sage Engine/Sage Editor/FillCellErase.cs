@@ -92,7 +92,7 @@ namespace Sage_Editor
 
         public override Command Clone()
         {
-            return new FillCellUndo(form);
+            return new FillCellErase(form);
         }
 
         private bool ComapreArrays(int[,] A, int[,] B)

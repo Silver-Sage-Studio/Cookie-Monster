@@ -9,18 +9,24 @@ namespace Sage_Engine
 {
     public static class Camera
     {
+
+        #region Variables
         public static int MapWidth;
         public static int MapHeight;
         public static int ScreenWidth;
         public static int ScreenHeight;
         static bool Set = false;
+        private static Vector2 position = Vector2.Zero;
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Call this method before trying to use the camera class or wont clamp properly.
         /// Needs ViewPorts width and height.
         /// </summary>
         /// <param name="screenWidth"></param>
         /// <param name="screenHeight"></param>
+        /// 
         public static void Initialise(int screenWidth, int screenHeight)
         {
             ScreenWidth = screenWidth;
@@ -39,9 +45,13 @@ namespace Sage_Engine
             Set = true;
         }
 
+        #endregion
 
-    
-        //Call this Propety In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world co-ordinates.
+        #region Property
+        /// <summary>
+        ///Call this Propety In every spritebatch to draw Srites Relative to Screen Co-Oridnates form world co-ordinates. 
+        /// </summary>
+
         public static Matrix TransFormMatrix
         {
             get
@@ -49,11 +59,6 @@ namespace Sage_Engine
                 return Matrix.CreateTranslation(new Vector3(-position, 0f));
             }
         }
-
-
-        
-        private static Vector2 position = Vector2.Zero;
-        
 
         /// <summary>
         /// The position of the camera, this method Validates and clapms itself to the map automatically.
@@ -67,15 +72,22 @@ namespace Sage_Engine
             set
             {
                 position = value;
-                if(Set)
+                if (Set)
                     ClampToMap(MapWidth, MapHeight);
-               
+
             }
         }
 
 
+        #endregion
 
-        ///Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
+        #region Logic
+        /// <summary>
+        /// Call this Method In the main Update to clamp Camera to the Map, Pass in Map Width And Height for the method to work.
+        /// </summary>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
+
         public static void ClampToMap(int Width, int Height)
         {
             if (position.X <= 0)
@@ -96,6 +108,6 @@ namespace Sage_Engine
             }
         }
 
-        
+        #endregion
     }
 }

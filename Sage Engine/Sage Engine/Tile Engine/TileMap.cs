@@ -8,10 +8,15 @@ using Microsoft.Xna.Framework;
 namespace Sage_Engine
 {
    public class TileMap
-    {
+   {
+       #region Varaibles
        List<TileLayer> layers = new List<TileLayer>();
+       #endregion
 
-
+       #region Properties
+       /// <summary>
+       /// Array list of all the tile layers
+       /// </summary>
        public List<TileLayer> Layers
        {
            get
@@ -19,8 +24,9 @@ namespace Sage_Engine
                return layers;
            }
        }
+       #endregion
 
-
+       #region Logic
        public void Draw(SpriteBatch spriteBatch)
        {
            foreach (TileLayer layer in layers)
@@ -28,7 +34,7 @@ namespace Sage_Engine
                layer.Draw(spriteBatch);
            }
        }
-
+       #endregion
 
        #region Helper-Methods
 
@@ -63,7 +69,10 @@ namespace Sage_Engine
            return max;
        }
 
-
+       /// <summary>
+       /// Add Layers
+       /// </summary>
+       /// <param name="layer"></param>
        public void Addlayer(TileLayer layer)
        {
            layers.Add(layer);
@@ -82,7 +91,6 @@ namespace Sage_Engine
        /// <returns></returns>
        public int TileAtPixel(int Pixelx, int PixelY)
        {
-           //SomeOne please test this method and give me feedback.(Faraz)
 
            int lastlayer;
            if (layers.Count > 0)

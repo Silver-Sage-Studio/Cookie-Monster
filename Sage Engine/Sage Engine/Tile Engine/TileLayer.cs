@@ -12,6 +12,7 @@ namespace Sage_Engine
     
    public class TileLayer
    {
+
        #region Variables
 
        int[,] layer;
@@ -19,7 +20,10 @@ namespace Sage_Engine
 
         float alpha = 1f;
 
-       //Change These According to the tile Height and width Must Be Same for all classes. Setters and getters included Below.
+       /// <summary>
+        /// Change These According to the tile Height and width Must Be Same for all classes. Setters and getters included Below.
+       /// </summary>
+
        private static  int TileWidth = 32;
        private static  int TileHeight = 32;
 
@@ -29,27 +33,27 @@ namespace Sage_Engine
        #region Properties/GetterSetter
 
        //Setter and getter for Alpha Transparecnt value of the layer.
-       //Alpha can only be between 0.0 and 1.0f , Where 0.0f is Full Transparency/ Blending and 1.0 is no blending.
+       
 
        public List<Texture2D> TexturesList {
            get {
                return this.textureList;
-              
            }
        }
 
-       public int[,] TileMapArray
-       {
-           get
-           {
-               return this.layer;
-           }
+       public int[,] TileMapArray{
+          get
+          {
+              return this.layer;
+          }
            set
            {
                layer = (int[,])value.Clone();
            }
-       }
-       
+   }
+       /// <summary>
+       /// Alpha can only be between 0.0 and 1.0f , Where 0.0f is Full Transparency/ Blending and 1.0 is no blending.
+       /// </summary>
        public float Alpha 
        {
            get
@@ -143,7 +147,10 @@ namespace Sage_Engine
 
        #region Constructer region
 
-       //Default Constructer to initilise a small Map by default.
+       /// <summary>
+       ///Default Constructer to initilise a small Map by default. 
+       /// </summary>
+
        public TileLayer()
        {
            layer = new int[25, 25];
