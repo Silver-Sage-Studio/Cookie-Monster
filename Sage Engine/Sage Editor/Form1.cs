@@ -137,6 +137,8 @@ namespace Sage_Editor
            // Camera.Initialise(GraphicsDevices);
         }
 
+       
+
         #endregion
 
        
@@ -386,34 +388,40 @@ namespace Sage_Editor
             {
                 string Path;
                 openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg|Jpg|*.jpg";
+                openFileDialog1.Multiselect = true;
 
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    Path = openFileDialog1.FileName;
 
-                    FileStream stream = new FileStream(Path, FileMode.Open);
-
-                    Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
-                    Image img = Image.FromStream(stream);
-
-                    string[] FileNames = Path.Split('\\');
-                    string FileName = FileNames[FileNames.Length - 1];
-                    string[] tmpFileName = FileName.Split('.');
-                    string FileNameMod = tmpFileName[0];
-
-                    currentLayer.AddTexture(text);
-                    foreach (TileLayer layer in Map.Layers)
+                    foreach (string path in openFileDialog1.FileNames)
                     {
-                        if (layer.HasTexture(text) == -1)
-                        {
-                            layer.AddTexture(text);
-                        }
-                    }
-                    dictTextures[FileNameMod] = text;
-                    dictImages[FileNameMod] = img;
+                        Path = path;
 
-                    TextureList.Items.Add(FileNameMod);
-                    stream.Dispose();
+                        FileStream stream = new FileStream(Path, FileMode.Open);
+
+                        Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
+                        Image img = Image.FromStream(stream);
+
+                        string[] FileNames = Path.Split('\\');
+                        string FileName = FileNames[FileNames.Length - 1];
+                        string[] tmpFileName = FileName.Split('.');
+                        string FileNameMod = tmpFileName[0];
+
+                        currentLayer.AddTexture(text);
+                        foreach (TileLayer layer in Map.Layers)
+                        {
+                            if (layer.HasTexture(text) == -1)
+                            {
+                                layer.AddTexture(text);
+                            }
+                        }
+                        dictTextures[FileNameMod] = text;
+                        dictImages[FileNameMod] = img;
+
+                        TextureList.Items.Add(FileNameMod);
+                        stream.Dispose();
+
+                    }
                 }
             }
             else

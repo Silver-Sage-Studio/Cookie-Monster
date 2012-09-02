@@ -84,8 +84,6 @@ namespace Sage_Editor
             currentLayer = FoundLayer;
 
             FoundLayer.TileMapArray = LayerStateBeforeRecursion.TileMapArray;
-
-
         }
 
 
