@@ -333,6 +333,30 @@ namespace Sage_Engine
        {
            return GetTileAtPixels((int)Pixels.X, (int)Pixels.Y);
        }
+
+
+       public void RemoveTexture(int IndexOfTexture)
+       {
+           for (int x = 0; x < this.LayerWidthinTiles ; x++)
+           {
+               for (int y = 0; y < this.LayerHeightinTiles; y++)
+               {
+                   int index = this.GetCellIndex(x, y);
+
+                   if (index == IndexOfTexture)
+                   {
+                       this.SetCellIndex(x, y, -1);
+                   }
+                   else if (index > IndexOfTexture)
+                   {
+                       this.SetCellIndex(x, y, index - 1);
+                   }
+               }
+           }
+
+           textureList.RemoveAt(IndexOfTexture);
+
+       }
        #endregion
 
    }

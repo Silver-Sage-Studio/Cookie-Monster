@@ -377,9 +377,11 @@ namespace Sage_Editor
 
         private void LayerList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string CurrentList = LayerList.SelectedItem.ToString();
-            currentLayer = dictLayer[CurrentList];
-
+            if (LayerList.SelectedItem != null)
+            {
+                string CurrentList = LayerList.SelectedItem.ToString();
+                currentLayer = dictLayer[CurrentList];
+            }
         }
 
         private void btnAddTexture_Click(object sender, EventArgs e)
@@ -434,17 +436,47 @@ namespace Sage_Editor
 
         private void TextureList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(TextureList.SelectedItem != null)
             pictureBox1.Image = dictImages[TextureList.SelectedItem as string];
         }
 
         private void btnRemoveTexture_Click(object sender, EventArgs e)
         {
-            
+
+            if (TextureList.SelectedItem != null)
+            {
+                if (MessageBox.Show("This operation cannot be reversed and will remove all tiles With the name of: " + TextureList.SelectedItem as string +
+                     " in all layers of this map", "Cautiuon: Removing Layer", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    Texture2D textureToBeRemoved = dictTextures[TextureList.SelectedItem as string];
+                    dictTextures.Remove(TextureList.SelectedItem as string);
+                    dictImages.Remove(TextureList.SelectedItem as string);
+
+                    TextureList.Items.Remove(TextureList.SelectedItem);
+
+                    foreach (TileLayer layer in Map.Layers)
+                    {
+                        int TextureIndex = layer.HasTexture(textureToBeRemoved);
+                        layer.RemoveTexture(TextureIndex);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Select a texture First");
+            }
         }
 
         private void btnRemoveLayer_Click(object sender, EventArgs e)
         {
-
+            if (LayerList.SelectedItem != null)
+            {
+                currentLayer = null;
+                Map.RemoveLayer(dictLayer[LayerList.SelectedItem as string]);
+                dictLayer.Remove(LayerList.SelectedItem as string);
+                LayerList.Items.Remove(LayerList.SelectedItem);
+            }
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

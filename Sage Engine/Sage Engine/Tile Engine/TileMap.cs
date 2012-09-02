@@ -122,6 +122,11 @@ namespace Sage_Engine
            return Index;
        }
 
+       public void RemoveLayer(TileLayer Layer)
+       {
+           layers.Remove(Layer);
+       }
+
        #endregion
     }
 
