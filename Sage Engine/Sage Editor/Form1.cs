@@ -496,7 +496,7 @@ namespace Sage_Editor
                 {
                     textureList[i]= (string)TextureList.Items[i];
                 }
-                currentLayer.ReadOutLayer(saveFileDialog1.FileName, textureList,currentLayer.TileMapArray);
+                currentLayer.ReadOutLayer(saveFileDialog1.FileName, textureList, dictTextures);
             }
         }
 
