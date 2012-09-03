@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using System.Xml;
 
 namespace Sage_Engine
 {
@@ -357,7 +358,47 @@ namespace Sage_Engine
            textureList.RemoveAt(IndexOfTexture);
 
        }
-       #endregion
 
-   }
+       public void ReadOutLayer(String fileName,string[] TextureNames,int[,] Currentlayer) {
+
+           XmlWriterSettings Setting = new XmlWriterSettings();
+           Setting.Indent = true;
+           XmlTextWriter writer = new XmlTextWriter(fileName,null);
+    writer.WriteStartDocument();
+	    writer.WriteStartElement("TileLayer");
+        writer.WriteAttributeString("Name", "TileLayer1");
+        writer.WriteAttributeString("ID", "1");
+
+        writer.WriteStartElement("Texture");
+        writer.WriteAttributeString("Name", TextureNames[0]);
+        writer.WriteEndElement();
+	    for(int i = 1;i<TextureNames.Length;i++)
+	    {
+		
+		writer.WriteStartElement("Texture");
+        writer.WriteAttributeString("Name",TextureNames[i]);
+
+		}
+        writer.WriteStartElement("Layer");
+        writer.WriteAttributeString("ID","1");
+        for (int i = 0; i < Currentlayer.GetLength(0); i++) {
+            for (int j = 0; j < Currentlayer.GetLength(1); j++)
+            {
+                writer.WriteString(""+layer[i, j]);
+            }
+            
+        }
+
+
+	    writer.WriteEndElement();
+        writer.WriteEndDocument();
+	    writer.Flush();
+           writer.Close();
+	    }
+  
+      
+
+
+       }
+       #endregion
 }

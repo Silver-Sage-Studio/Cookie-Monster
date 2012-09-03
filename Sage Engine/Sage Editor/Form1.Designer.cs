@@ -106,31 +106,32 @@
             this.saveAllLayerToolStripMenuItem,
             this.loadLayerToolStripMenuItem});
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
-            this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.layerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.layerToolStripMenuItem.Text = "Layer";
             // 
             // saveLayerToolStripMenuItem
             // 
             this.saveLayerToolStripMenuItem.Name = "saveLayerToolStripMenuItem";
-            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveLayerToolStripMenuItem.Text = "Save Layer";
+            this.saveLayerToolStripMenuItem.Click += new System.EventHandler(this.saveLayerToolStripMenuItem_Click);
             // 
             // saveAsLayerToolStripMenuItem
             // 
             this.saveAsLayerToolStripMenuItem.Name = "saveAsLayerToolStripMenuItem";
-            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsLayerToolStripMenuItem.Text = "SaveAs Layer";
             // 
             // saveAllLayerToolStripMenuItem
             // 
             this.saveAllLayerToolStripMenuItem.Name = "saveAllLayerToolStripMenuItem";
-            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAllLayerToolStripMenuItem.Text = "Save All Layer";
             // 
             // loadLayerToolStripMenuItem
             // 
             this.loadLayerToolStripMenuItem.Name = "loadLayerToolStripMenuItem";
-            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadLayerToolStripMenuItem.Text = "Load Layer";
             // 
             // mapToolStripMenuItem
@@ -140,7 +141,7 @@
             this.saveAsMapToolStripMenuItem,
             this.loadMapToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.mapToolStripMenuItem.Text = "Map";
             // 
             // saveMapToolStripMenuItem
@@ -168,7 +169,7 @@
             this.saveAsLevelToolStripMenuItem,
             this.loadLevelToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // saveLevelToolStripMenuItem
@@ -192,7 +193,7 @@
             // exitBitchesToolStripMenuItem
             // 
             this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
             // 

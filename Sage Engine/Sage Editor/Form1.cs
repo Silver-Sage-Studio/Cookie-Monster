@@ -486,5 +486,19 @@ namespace Sage_Editor
 
 #endregion 
 
+        private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string[] textureList = new string[TextureList.Items.Count];
+
+                for(int i = 0; i< TextureList.Items.Count; i++)
+                {
+                    textureList[i]= (string)TextureList.Items[i];
+                }
+                currentLayer.ReadOutLayer(saveFileDialog1.FileName, textureList,currentLayer.TileMapArray);
+            }
+        }
+
     }
 }

@@ -24,3 +24,16 @@ C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\
 C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\tile.png
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.LayerForm.resources
 C:\Users\Ali\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\tile.png
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.exe
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.pdb
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\tile.png
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage_Editor.exe
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage_Editor.pdb
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.dll
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Sage Engine.pdb
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.Form1.resources
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.LayerForm.resources
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.Properties.Resources.resources
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\GenerateResource.write.1.tlog
