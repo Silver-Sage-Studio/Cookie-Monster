@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using System.IO;
 using System.Xml;
 
 namespace Sage_Engine
@@ -66,7 +67,7 @@ namespace Sage_Engine
             }
             set
             {
-                MathHelper.Clamp(value, 0.0f, 1.0f);
+               alpha =  MathHelper.Clamp(value, 0.0f, 1.0f);
             }
         }
 
@@ -362,7 +363,68 @@ namespace Sage_Engine
 
         }
 
-        public void ReadOutLayer(String fileName, string[] TextureNames, Dictionary<string, Texture2D> dictTextures)
+
+        public static TileLayer ReadInLayer(string fileName, out Dictionary<int, string> textureNames, out string LayerName)
+        {
+            TileLayer layerToReturn = null;
+            Dictionary<int, string> dicToReturn = new Dictionary<int,string>();
+            float layerAlpha=1.0f;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileName);
+            
+            XmlNode BaseNode = doc.DocumentElement;
+            LayerName = BaseNode.Attributes["Name"].Value;
+
+            foreach (XmlNode node in BaseNode.ChildNodes)
+            {
+                if (node.Name == "Textures")
+                {
+                    foreach (XmlNode textureNode in node.ChildNodes)
+                    {
+                        dicToReturn.Add(int.Parse(textureNode.Attributes["ID"].Value) , textureNode.Attributes["Name"].Value);
+                    }
+
+                }
+                else if (node.Name == "Properties")
+                {
+                    foreach (XmlNode propertyNode in node.ChildNodes)
+                    {
+                        if (propertyNode.Name == "Alpha")
+                        {
+                            layerAlpha = float.Parse(propertyNode.Attributes["Value"].Value);
+                        }
+                    }
+                }
+                else if (node.Name == "Layer")
+                {
+                    int width, height;
+                    width = int.Parse(node.Attributes["Width"].Value);
+                    height = int.Parse(node.Attributes["Height"].Value);
+
+                    layerToReturn = new TileLayer(width, height);
+                    int  y = 0;
+
+                    foreach (XmlNode RowNode in node.ChildNodes)
+                    {
+                        string row = RowNode.InnerText;
+                        row.Trim();
+                        row.TrimStart(' ');
+                        string[] CellsInRow = row.Split(' ');
+
+                        for (int x = 1; x < CellsInRow.Length; x++)
+                        {
+                            layerToReturn.SetCellIndex(x-1, y, int.Parse(CellsInRow[x]));
+                        }
+                        y++;
+                    }
+                }
+            } //ForEach Loop Ends Having Read in Everything.
+            layerToReturn.Alpha = layerAlpha;
+            textureNames = dicToReturn;
+            return layerToReturn;
+        }
+
+        public void ReadOutLayer(String fileName, string[] TextureNames, Dictionary<string, Texture2D> dictTextures, string LayerName)
         {
 
             XmlWriterSettings settings = new XmlWriterSettings();
@@ -370,6 +432,8 @@ namespace Sage_Engine
             XmlWriter writer = XmlWriter.Create(fileName, settings);
 
             writer.WriteStartElement("TileLayer");
+            writer.WriteAttributeString("Name", LayerName); 
+
             writer.WriteStartElement("Textures");
             foreach (string Text in TextureNames)
             {

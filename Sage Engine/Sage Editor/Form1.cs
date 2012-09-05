@@ -381,6 +381,7 @@ namespace Sage_Editor
             {
                 string CurrentList = LayerList.SelectedItem.ToString();
                 currentLayer = dictLayer[CurrentList];
+                barAlpha.Value = (int)currentLayer.Alpha * 100;
             }
         }
 
@@ -422,7 +423,6 @@ namespace Sage_Editor
 
                         TextureList.Items.Add(FileNameMod);
                         stream.Dispose();
-
                     }
                 }
             }
@@ -486,19 +486,100 @@ namespace Sage_Editor
 
 #endregion 
 
+
+        string SaveLayerPath = "";
         private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if ((currentLayer != null) && (LayerList.SelectedItem as string != null))
             {
-                string[] textureList = new string[TextureList.Items.Count];
-
-                for(int i = 0; i< TextureList.Items.Count; i++)
+                if ((SaveLayerPath == "") && (saveFileDialog1.ShowDialog() == DialogResult.OK))
                 {
-                    textureList[i]= (string)TextureList.Items[i];
+                    SaveLayerPath = saveFileDialog1.FileName;
                 }
-                currentLayer.ReadOutLayer(saveFileDialog1.FileName, textureList, dictTextures);
+
+                if (SaveLayerPath != "")
+                {
+                    string[] textureList = new string[TextureList.Items.Count];
+
+                    for (int i = 0; i < TextureList.Items.Count; i++)
+                    {
+                        textureList[i] = (string)TextureList.Items[i];
+                    }
+
+                    currentLayer.ReadOutLayer(SaveLayerPath, textureList, dictTextures, LayerList.SelectedItem as string);
+                }
             }
         }
 
+        string[] Extensions = new string[]
+        {
+            ".jpg", "png"
+        };
+
+        private void loadLayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml";
+
+            Dictionary<int, string> texturesToLoad;
+            string NameOfLayer;
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                TileLayer layer = TileLayer.ReadInLayer(openFileDialog2.FileName, out texturesToLoad, out NameOfLayer);
+                string extensFound = "";
+                try
+                {
+                    foreach (KeyValuePair<int, string> texturespaths in texturesToLoad)
+                    {
+                        foreach (string ext in Extensions)
+                        {
+                            if (File.Exists(texPathAddress.Text + "\\" + texturespaths.Value + ext))
+                            {
+                                extensFound = ext;
+                                break;
+                            }
+                        }
+
+                        FileStream stream = new FileStream(texPathAddress.Text + "\\" + texturespaths.Value + extensFound, FileMode.Open);
+                        Texture2D texture = Texture2D.FromStream(GraphicsDevices, stream);
+                        layer.AddTexture(texture);
+                        stream.Dispose();
+                        if (!dictTextures.ContainsKey(texturespaths.Value))
+                        {
+                            TextureList.Items.Add(texturespaths.Value);
+                            dictTextures.Add(texturespaths.Value, texture);
+                            Image img = Image.FromFile(texPathAddress.Text + "\\" + texturespaths.Value + extensFound);
+                            dictImages.Add(texturespaths.Value, img);
+                        }
+                    }
+                    dictLayer[NameOfLayer] = layer;
+                    Map.Addlayer(layer);
+                    LayerList.Items.Add(NameOfLayer);
+                    currentLayer = layer;
+                    LayerList.SelectedIndex = LayerList.Items.Count - 1;
+                }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show("Cannot Load Layer File. the texure: " +
+                        ex.FileName +
+                        " Could not be found in the content folder you have chosen. Content Folder Selector button has been enabled, you have can choose another Directory that has the resource you are trying to load.", "RESOURCE FILE NOT FOUND");
+                    btnAddFiles.Enabled = true;
+                }
+            }
+           
+        }
+
+        private void texPathAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void barAlpha_Scroll(object sender, EventArgs e)
+        {
+            if (currentLayer != null)
+            {
+                float alph = ((float)barAlpha.Value) / 100.0f;
+                currentLayer.Alpha = alph;
+            }
+        }
     }
 }
