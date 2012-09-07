@@ -35,6 +35,8 @@
             this.saveAsLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,10 +133,27 @@
             // 
             // loadLayerToolStripMenuItem
             // 
+            this.loadLayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quickLoadToolStripMenuItem,
+            this.newLoadToolStripMenuItem});
             this.loadLayerToolStripMenuItem.Name = "loadLayerToolStripMenuItem";
             this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.loadLayerToolStripMenuItem.Text = "Load Layer";
             this.loadLayerToolStripMenuItem.Click += new System.EventHandler(this.loadLayerToolStripMenuItem_Click);
+            // 
+            // quickLoadToolStripMenuItem
+            // 
+            this.quickLoadToolStripMenuItem.Name = "quickLoadToolStripMenuItem";
+            this.quickLoadToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.quickLoadToolStripMenuItem.Text = "QuickLoad";
+            this.quickLoadToolStripMenuItem.Click += new System.EventHandler(this.quickLoadToolStripMenuItem_Click);
+            // 
+            // newLoadToolStripMenuItem
+            // 
+            this.newLoadToolStripMenuItem.Name = "newLoadToolStripMenuItem";
+            this.newLoadToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.newLoadToolStripMenuItem.Text = "New Load";
+            this.newLoadToolStripMenuItem.Click += new System.EventHandler(this.newLoadToolStripMenuItem_Click);
             // 
             // mapToolStripMenuItem
             // 
@@ -437,10 +456,12 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FilterIndex = 4;
             // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.FilterIndex = 4;
             // 
             // tileDisplay1
             // 
@@ -523,6 +544,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.ToolStripMenuItem quickLoadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newLoadToolStripMenuItem;
     }
 }
 

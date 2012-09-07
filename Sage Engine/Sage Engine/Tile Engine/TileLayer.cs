@@ -364,7 +364,7 @@ namespace Sage_Engine
         }
 
 
-        public static TileLayer ReadInLayer(string fileName, out Dictionary<int, string> textureNames, out string LayerName)
+        public static TileLayer ReadInLayer(string fileName, out Dictionary<int, string> textureNames, out string LayerName,out string ContentPath)
         {
             TileLayer layerToReturn = null;
             Dictionary<int, string> dicToReturn = new Dictionary<int,string>();
@@ -374,7 +374,7 @@ namespace Sage_Engine
             
             XmlNode BaseNode = doc.DocumentElement;
             LayerName = BaseNode.Attributes["Name"].Value;
-
+            ContentPath = BaseNode.Attributes["ContentPath"].Value;
             foreach (XmlNode node in BaseNode.ChildNodes)
             {
                 if (node.Name == "Textures")
@@ -424,7 +424,7 @@ namespace Sage_Engine
             return layerToReturn;
         }
 
-        public void ReadOutLayer(String fileName, string[] TextureNames, Dictionary<string, Texture2D> dictTextures, string LayerName)
+        public void ReadOutLayer(String fileName,string Contentpath ,string[] TextureNames, Dictionary<string, Texture2D> dictTextures, string LayerName)
         {
 
             XmlWriterSettings settings = new XmlWriterSettings();
@@ -432,7 +432,8 @@ namespace Sage_Engine
             XmlWriter writer = XmlWriter.Create(fileName, settings);
 
             writer.WriteStartElement("TileLayer");
-            writer.WriteAttributeString("Name", LayerName); 
+            writer.WriteAttributeString("Name", LayerName);
+            writer.WriteAttributeString("ContentPath", Contentpath);
 
             writer.WriteStartElement("Textures");
             foreach (string Text in TextureNames)
