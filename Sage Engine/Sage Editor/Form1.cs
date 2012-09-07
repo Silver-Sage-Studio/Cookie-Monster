@@ -18,7 +18,7 @@ namespace Sage_Editor
     {
         
         #region Variables
-
+    
         public SpriteBatch spriteBatch;
         public string WorkspacePath;
         public bool workspacesheck=false;
@@ -81,10 +81,17 @@ namespace Sage_Editor
             //}
 
             XmlDocument doc = new XmlDocument();
+<<<<<<< HEAD
             doc.Load(System.IO.Directory.GetCurrentDirectory() + "\\Content\\editorInfo.info");
             XmlNode nodes = doc.DocumentElement;
            
                 WorkspacePath = nodes.Attributes["workspace"].Value;
+=======
+            doc.Load(@"Content/editorInfo.info");
+            XmlNode nodes = doc.DocumentElement;
+            WorkspacePath = nodes.Attributes["workspace"].Value;
+            
+>>>>>>> workspace-final
        
                 tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
                 tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
@@ -344,7 +351,11 @@ namespace Sage_Editor
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             folderBrowserDialog1.SelectedPath = WorkspacePath + "\\Content Folder";
+=======
+            folderBrowserDialog1.SelectedPath = WorkspacePath;
+>>>>>>> workspace-final
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 texPathAddress.Text = folderBrowserDialog1.SelectedPath;
@@ -403,6 +414,7 @@ namespace Sage_Editor
             if (currentLayer != null)
             {
                 string Path;
+                openFileDialog1.InitialDirectory = WorkspacePath;
                 openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg|Jpg|*.jpg|All Image Formats|*.png;*.jpeg;*.jpg";
                 openFileDialog1.Multiselect = true;
 
@@ -503,6 +515,11 @@ namespace Sage_Editor
         string SaveLayerPath = "";
         private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.InitialDirectory = WorkspacePath;
+            saveFileDialog1.OverwritePrompt = true;
+            saveFileDialog1.FileName = LayerList.SelectedItem as string;
+            saveFileDialog1.DefaultExt = "layer";
+            saveFileDialog1.Filter = "Layer|*.layer";
             if ((currentLayer != null) && (LayerList.SelectedItem as string != null))
             {
                 if ((SaveLayerPath == "") && (saveFileDialog1.ShowDialog() == DialogResult.OK))
@@ -551,6 +568,7 @@ namespace Sage_Editor
 
         private void quickLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            openFileDialog2.InitialDirectory = WorkspacePath;
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer;*.map;*.xml";
             Dictionary<int, string> texturesToLoad;
             string NameOfLayer;
@@ -591,6 +609,7 @@ namespace Sage_Editor
                     LayerList.Items.Add(NameOfLayer);
                     currentLayer = layer;
                     LayerList.SelectedIndex = LayerList.Items.Count - 1;
+                    activateControls();
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -604,6 +623,10 @@ namespace Sage_Editor
 
         private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> workspace-final
             while (string.IsNullOrEmpty(texPathAddress.Text))
             {
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -622,8 +645,14 @@ namespace Sage_Editor
                     MessageBox.Show("Please Choose A Content Directory");
                 }
             }
+<<<<<<< HEAD
             
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer,*.map,*.xml";
+=======
+
+            openFileDialog2.InitialDirectory = WorkspacePath;
+            openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer;*.map;*.xml";
+>>>>>>> workspace-final
 
             Dictionary<int, string> texturesToLoad;
             string NameOfLayer;
