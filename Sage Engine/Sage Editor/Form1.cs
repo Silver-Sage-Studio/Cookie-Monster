@@ -81,17 +81,11 @@ namespace Sage_Editor
             //}
 
             XmlDocument doc = new XmlDocument();
-<<<<<<< HEAD
-            doc.Load(System.IO.Directory.GetCurrentDirectory() + "\\Content\\editorInfo.info");
-            XmlNode nodes = doc.DocumentElement;
            
-                WorkspacePath = nodes.Attributes["workspace"].Value;
-=======
             doc.Load(@"Content/editorInfo.info");
             XmlNode nodes = doc.DocumentElement;
             WorkspacePath = nodes.Attributes["workspace"].Value;
             
->>>>>>> workspace-final
        
                 tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
                 tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
@@ -351,11 +345,7 @@ namespace Sage_Editor
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            folderBrowserDialog1.SelectedPath = WorkspacePath + "\\Content Folder";
-=======
             folderBrowserDialog1.SelectedPath = WorkspacePath;
->>>>>>> workspace-final
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 texPathAddress.Text = folderBrowserDialog1.SelectedPath;
@@ -623,10 +613,6 @@ namespace Sage_Editor
 
         private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-=======
-            
->>>>>>> workspace-final
             while (string.IsNullOrEmpty(texPathAddress.Text))
             {
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -645,14 +631,11 @@ namespace Sage_Editor
                     MessageBox.Show("Please Choose A Content Directory");
                 }
             }
-<<<<<<< HEAD
             
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer,*.map,*.xml";
-=======
 
             openFileDialog2.InitialDirectory = WorkspacePath;
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer;*.map;*.xml";
->>>>>>> workspace-final
 
             Dictionary<int, string> texturesToLoad;
             string NameOfLayer;
