@@ -12,13 +12,16 @@ using Microsoft.Xna.Framework.Input;
 namespace Sage_Editor
 {
     using Image = System.Drawing.Image;
+    using System.Xml;
+    using System.Reflection;
     public partial class Form1 : Form
     {
         
         #region Variables
 
         public SpriteBatch spriteBatch;
-
+        public string WorkspacePath;
+        public bool workspacesheck=false;
         public Texture2D EmptyTile;
 
         public Dictionary<string, Texture2D> dictTextures = new Dictionary<string, Texture2D>();
@@ -59,28 +62,37 @@ namespace Sage_Editor
         public Form1()
         {
             InitializeComponent();
-            tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
-            tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
-
-            Application.Idle += delegate { tileDisplay1.Invalidate(); };
-            Application.Idle += delegate { vScrollBar1.Invalidate(); };
+            
 
            
-            while (string.IsNullOrEmpty(texPathAddress.Text))
-            {
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    texPathAddress.Text = folderBrowserDialog1.SelectedPath;
-                    this.WindowState = FormWindowState.Maximized;
+            //while (string.IsNullOrEmpty(texPathAddress.Text))
+            //{
+            //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        texPathAddress.Text = folderBrowserDialog1.SelectedPath;
+            //        this.WindowState = FormWindowState.Maximized;
                     
-                    activateControls();
-                }
-                else
-                {
-                    MessageBox.Show("Please Choose A Content Directory");
-                }
+            //        activateControls();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Please Choose A Content Directory");
+            //    }
+            //}
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(System.IO.Directory.GetCurrentDirectory() + "\\Content\\editorInfo.info");
+            XmlNode nodes = doc.DocumentElement;
+           
+                WorkspacePath = nodes.Attributes["workspace"].Value;
+       
+                tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
+                tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
+
+                Application.Idle += delegate { tileDisplay1.Invalidate(); };
+                Application.Idle += delegate { vScrollBar1.Invalidate(); };
             }
-        }
+
 
         private void activateControls()
         {
@@ -332,6 +344,7 @@ namespace Sage_Editor
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = WorkspacePath + "\\Content Folder";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 texPathAddress.Text = folderBrowserDialog1.SelectedPath;
@@ -591,6 +604,25 @@ namespace Sage_Editor
 
         private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            while (string.IsNullOrEmpty(texPathAddress.Text))
+            {
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    texPathAddress.Text = folderBrowserDialog1.SelectedPath;
+                    this.WindowState = FormWindowState.Maximized;
+
+                    activateControls();
+                }
+                else if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }else
+
+                {
+                    MessageBox.Show("Please Choose A Content Directory");
+                }
+            }
+            
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer,*.map,*.xml";
 
             Dictionary<int, string> texturesToLoad;
@@ -640,6 +672,11 @@ namespace Sage_Editor
                     btnAddFiles.Enabled = true;
                 }
             }
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }

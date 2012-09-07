@@ -71,6 +71,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.openWorksapceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileDisplay1 = new Sage_Editor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -93,6 +94,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openWorksapceToolStripMenuItem,
             this.layerToolStripMenuItem,
             this.mapToolStripMenuItem,
             this.levelToolStripMenuItem,
@@ -109,7 +111,7 @@
             this.saveAllLayerToolStripMenuItem,
             this.loadLayerToolStripMenuItem});
             this.layerToolStripMenuItem.Name = "layerToolStripMenuItem";
-            this.layerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.layerToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.layerToolStripMenuItem.Text = "Layer";
             // 
             // saveLayerToolStripMenuItem
@@ -162,7 +164,7 @@
             this.saveAsMapToolStripMenuItem,
             this.loadMapToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.mapToolStripMenuItem.Text = "Map";
             // 
             // saveMapToolStripMenuItem
@@ -190,7 +192,7 @@
             this.saveAsLevelToolStripMenuItem,
             this.loadLevelToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // saveLevelToolStripMenuItem
@@ -214,7 +216,7 @@
             // exitBitchesToolStripMenuItem
             // 
             this.exitBitchesToolStripMenuItem.Name = "exitBitchesToolStripMenuItem";
-            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
             // 
@@ -442,6 +444,7 @@
             this.vScrollBar1.Size = new System.Drawing.Size(17, 633);
             this.vScrollBar1.TabIndex = 3;
             this.vScrollBar1.Visible = false;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // hScrollBar1
             // 
@@ -462,6 +465,12 @@
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.FilterIndex = 4;
+            // 
+            // openWorksapceToolStripMenuItem
+            // 
+            this.openWorksapceToolStripMenuItem.Name = "openWorksapceToolStripMenuItem";
+            this.openWorksapceToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openWorksapceToolStripMenuItem.Text = "Open Worksapce";
             // 
             // tileDisplay1
             // 
@@ -546,6 +555,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.ToolStripMenuItem quickLoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newLoadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openWorksapceToolStripMenuItem;
     }
 }
 
