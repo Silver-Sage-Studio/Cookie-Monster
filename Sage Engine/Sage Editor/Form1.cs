@@ -8,12 +8,13 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Xml;
+using System.Reflection;
 
 namespace Sage_Editor
 {
     using Image = System.Drawing.Image;
-    using System.Xml;
-    using System.Reflection;
+    
     public partial class Form1 : Form
     {
         
@@ -27,6 +28,7 @@ namespace Sage_Editor
         public Dictionary<string, Texture2D> dictTextures = new Dictionary<string, Texture2D>();
         public Dictionary<string, Image> dictImages = new Dictionary<string, Image>();
         public Dictionary<string, TileLayer> dictLayer = new Dictionary<string, TileLayer>();
+
         public int mouseClickCount = 20;
         public TileMap Map = new TileMap();
         public TileLayer currentLayer;
@@ -63,7 +65,6 @@ namespace Sage_Editor
         {
             InitializeComponent();
             
-
            
             //while (string.IsNullOrEmpty(texPathAddress.Text))
             //{
@@ -80,19 +81,64 @@ namespace Sage_Editor
             //    }
             //}
 
-            XmlDocument doc = new XmlDocument();
-           
-            doc.Load(@"Content/editorInfo.info");
-            XmlNode nodes = doc.DocumentElement;
-            WorkspacePath = nodes.Attributes["workspace"].Value;
-            
-       
-                tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
-                tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(@"Content/editorInfo.info");
+            //XmlNode nodes = doc.DocumentElement;
+            //WorkspacePath = nodes.Attributes["workspace"].Value;
 
-                Application.Idle += delegate { tileDisplay1.Invalidate(); };
-                Application.Idle += delegate { vScrollBar1.Invalidate(); };
+
+            XmlDocument SettingsFile = new XmlDocument();
+
+            while (!(Directory.Exists(@"C:\SilverSages")))
+            {
+               
+                MessageBox.Show("ContentPath Not Found Please Browse To your contentFolder", "Path Not Found");
+
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    Directory.CreateDirectory(@"C:\SilverSages");
+
+                    XmlWriterSettings writerSettings = new XmlWriterSettings();
+                    writerSettings.Indent = true;
+                    writerSettings.NewLineChars = "<";
+
+                    XmlWriter writer = XmlWriter.Create(@"C:\SilverSages\Settings.info");
+                    writer.WriteElementString("ContentFolderPath", folderBrowserDialog1.SelectedPath);
+
+                    writer.Flush();
+                    writer.Close();
+                }
             }
+            if (!File.Exists(@"C:\SilverSages\Settings.info"))
+            {
+                MessageBox.Show("ContentPath Not Found Plese Browse To your contentFolder", "Path Not Found");
+
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    XmlWriterSettings writerSettings = new XmlWriterSettings();
+                    writerSettings.Indent = true;
+
+                    XmlWriter writer = XmlWriter.Create(@"C:\SilverSages\Settings.info");
+                    writer.WriteElementString("ContentFolderPath", folderBrowserDialog1.SelectedPath);
+
+                    writer.Flush();
+                    writer.Close();
+                }
+            }
+
+            SettingsFile.Load(@"C:\SilverSages\Settings.info");
+            texPathAddress.Text = SettingsFile.DocumentElement.InnerText.Trim();
+            this.WindowState = FormWindowState.Maximized;
+            activateControls();
+
+
+            
+            tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
+            tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
+
+            Application.Idle += delegate { tileDisplay1.Invalidate(); };
+            Application.Idle += delegate { vScrollBar1.Invalidate(); };
+        }
 
 
         private void activateControls()
@@ -138,7 +184,6 @@ namespace Sage_Editor
             DrawEmptyTiles.Initialise(this);
 
             Mouse.WindowHandle = tileDisplay1.Handle;
-
 
 
            tileDisplay1.Cursor = Cursors.Cross;
@@ -407,6 +452,7 @@ namespace Sage_Editor
                 openFileDialog1.InitialDirectory = WorkspacePath;
                 openFileDialog1.Filter = "Png|*.png|Jpeg|*.jpeg|Jpg|*.jpg|All Image Formats|*.png;*.jpeg;*.jpg";
                 openFileDialog1.Multiselect = true;
+                openFileDialog1.InitialDirectory = texPathAddress.Text;
 
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
@@ -420,10 +466,13 @@ namespace Sage_Editor
                         Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
                         Image img = Image.FromStream(stream);
 
-                        string[] FileNames = Path.Split('\\');
-                        string FileName = FileNames[FileNames.Length - 1];
-                        string[] tmpFileName = FileName.Split('.');
-                        string FileNameMod = tmpFileName[0];
+                        string TextureNameToBeSaved = path.Substring(texPathAddress.Text.Length);
+
+
+                        //string[] FileNames = Path.Split('\\');
+                        //string FileName = FileNames[FileNames.Length - 1];
+                        //string[] tmpFileName = FileName.Split('.');
+                        //string FileNameMod = tmpFileName[0];
 
                         currentLayer.AddTexture(text);
                         foreach (TileLayer layer in Map.Layers)
@@ -433,10 +482,10 @@ namespace Sage_Editor
                                 layer.AddTexture(text);
                             }
                         }
-                        dictTextures[FileNameMod] = text;
-                        dictImages[FileNameMod] = img;
+                        dictTextures[TextureNameToBeSaved] = text;
+                        dictImages[TextureNameToBeSaved] = img;
 
-                        TextureList.Items.Add(FileNameMod);
+                        TextureList.Items.Add(TextureNameToBeSaved);
                         stream.Dispose();
                     }
                 }

@@ -15,7 +15,7 @@ namespace Sage_Editor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new workspace());
+            Application.Run(new Form1());
         }
     }
 }
