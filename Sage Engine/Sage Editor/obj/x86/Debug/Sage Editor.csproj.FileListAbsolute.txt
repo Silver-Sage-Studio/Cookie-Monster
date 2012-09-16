@@ -39,3 +39,4 @@ C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj
 C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\editorInfo.info
 C:\Users\Wahab Jawed\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\obj\x86\Debug\Sage_Editor.workspace.resources
+C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\Sage Editor\bin\Debug\Content\Cross.jpg
