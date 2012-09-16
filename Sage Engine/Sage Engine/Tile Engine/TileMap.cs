@@ -11,6 +11,8 @@ namespace Sage_Engine
    {
        #region Varaibles
        List<TileLayer> layers = new List<TileLayer>();
+
+       int[,] CollisionMap;
        #endregion
 
        #region Properties
@@ -22,6 +24,23 @@ namespace Sage_Engine
            get
            {
                return layers;
+           }
+       }
+
+
+       public int CollisoionMapWidth
+       {
+           get
+           {
+               return CollisionMap.GetLength(1);
+           }
+       }
+
+       public int ColliosnMapHeight
+       {
+           get
+           {
+               return CollisionMap.GetLength(0);
            }
        }
        #endregion
@@ -37,6 +56,13 @@ namespace Sage_Engine
        #endregion
 
        #region Helper-Methods
+
+       public void SetCollisionTile(int x, int y, int CollisionIndex)
+       {
+           if ((y >= 0) && (y < ColliosnMapHeight) &&
+            (x >= 0) && (x <= CollisoionMapWidth))
+               CollisionMap[y, x] = CollisionIndex;
+       }
 
 
        /// <summary>
@@ -78,7 +104,66 @@ namespace Sage_Engine
            layers.Add(layer);
            Camera.MapHeight = MapHeight() * TileLayer.GetTileHeight;
            Camera.MapWidth = MapWidth() * TileLayer.GetTileWidth;
+           modifyCollisionMap();
        }
+
+
+           //public void SetCellIndex(int x, int y, int Collided)
+           //{
+           //    if ((y >= 0) && (y < LayerHeightinTiles) &&
+           //        (x >= 0) && (x <= LayerWidthinTiles))
+           //        layer[y, x] = Index;
+           //}
+
+
+       private void modifyCollisionMap()
+       {
+           int maxWidth = -1;
+           int maxHeight = -1;
+
+           foreach (TileLayer layer in Layers)
+           {
+              if(layer.LayerWidthinTiles > maxWidth)
+               {
+                   maxWidth = layer.LayerWidthinTiles;
+               }
+               if(layer.LayerHeightinTiles > maxHeight)
+               {
+                   maxHeight = layer.LayerHeightinTiles;
+               }
+           }
+
+           
+           if (Layers.Count > 0)
+           {
+               if (CollisionMap != null)
+               {
+                   int[,] TempMap = (int[,])CollisionMap.Clone();
+
+                   CollisionMap = new int[maxWidth, maxHeight];
+
+                   for (int x = 0; x < Math.Min(maxWidth, TempMap.GetLength(0)); x++)
+                   {
+                       for (int y = 0; y < Math.Min(maxHeight, TempMap.GetLength(1)); y++)
+                       {
+                           CollisionMap[x, y] = TempMap[x, y];
+                       }
+                   }
+               }
+               else
+               {
+                   CollisionMap = new int[maxWidth, maxHeight];
+               }
+
+                
+           }
+           else
+           {
+               CollisionMap = null;
+           }
+
+       }
+
 
 
        /// <summary>
@@ -101,7 +186,6 @@ namespace Sage_Engine
            {
                return -1;
            }
-
            
            int tileX = Pixelx + (int)Camera.Position.X;
            int tileY = PixelY + (int)Camera.Position.Y;
@@ -125,6 +209,7 @@ namespace Sage_Engine
        public void RemoveLayer(TileLayer Layer)
        {
            layers.Remove(Layer);
+           //modifyCollisionMap();
        }
 
        #endregion

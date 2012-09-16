@@ -45,7 +45,7 @@ namespace Sage_Editor
         public override void Undo()
         {
 
-            if (!(form.currentLayer.Equals(null)))
+            if (form.currentLayer != null)
             {
                 form.currentLayer = this.layer;
                 layer.SetCellIndex((int)TileLocation.X, (int)TileLocation.Y, this.PreviousTexture);

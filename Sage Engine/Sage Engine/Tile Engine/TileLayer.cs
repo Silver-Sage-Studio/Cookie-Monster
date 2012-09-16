@@ -244,7 +244,6 @@ namespace Sage_Engine
             if ((y >= 0) && (y < LayerHeightinTiles) &&
                 (x >= 0) && (x <= LayerWidthinTiles))
                 layer[y, x] = Index;
-
         }
 
         /// <summary>
@@ -262,7 +261,6 @@ namespace Sage_Engine
 
             else
                 return -2;
-
         }
 
         /// <summary>

@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openWorksapceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +63,9 @@
             this.texPathAddress = new System.Windows.Forms.TextBox();
             this.btnAddFiles = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.radioEarseColl = new System.Windows.Forms.RadioButton();
+            this.radioSetColl = new System.Windows.Forms.RadioButton();
+            this.checkShowCollision = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -71,13 +75,13 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.openWorksapceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileDisplay1 = new Sage_Editor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAlpha)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -102,6 +106,12 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openWorksapceToolStripMenuItem
+            // 
+            this.openWorksapceToolStripMenuItem.Name = "openWorksapceToolStripMenuItem";
+            this.openWorksapceToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openWorksapceToolStripMenuItem.Text = "Open Worksapce";
             // 
             // layerToolStripMenuItem
             // 
@@ -399,6 +409,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.radioEarseColl);
+            this.tabPage2.Controls.Add(this.radioSetColl);
+            this.tabPage2.Controls.Add(this.checkShowCollision);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -406,6 +419,38 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Collision Map";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // radioEarseColl
+            // 
+            this.radioEarseColl.AutoSize = true;
+            this.radioEarseColl.Location = new System.Drawing.Point(29, 100);
+            this.radioEarseColl.Name = "radioEarseColl";
+            this.radioEarseColl.Size = new System.Drawing.Size(93, 17);
+            this.radioEarseColl.TabIndex = 1;
+            this.radioEarseColl.TabStop = true;
+            this.radioEarseColl.Text = "Erase Collision";
+            this.radioEarseColl.UseVisualStyleBackColor = true;
+            // 
+            // radioSetColl
+            // 
+            this.radioSetColl.AutoSize = true;
+            this.radioSetColl.Location = new System.Drawing.Point(29, 77);
+            this.radioSetColl.Name = "radioSetColl";
+            this.radioSetColl.Size = new System.Drawing.Size(82, 17);
+            this.radioSetColl.TabIndex = 1;
+            this.radioSetColl.TabStop = true;
+            this.radioSetColl.Text = "Set Collision";
+            this.radioSetColl.UseVisualStyleBackColor = true;
+            // 
+            // checkShowCollision
+            // 
+            this.checkShowCollision.AutoSize = true;
+            this.checkShowCollision.Location = new System.Drawing.Point(29, 37);
+            this.checkShowCollision.Name = "checkShowCollision";
+            this.checkShowCollision.Size = new System.Drawing.Size(123, 17);
+            this.checkShowCollision.TabIndex = 0;
+            this.checkShowCollision.Text = "Show CollidableTiles";
+            this.checkShowCollision.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -466,12 +511,6 @@
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.FilterIndex = 4;
             // 
-            // openWorksapceToolStripMenuItem
-            // 
-            this.openWorksapceToolStripMenuItem.Name = "openWorksapceToolStripMenuItem";
-            this.openWorksapceToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.openWorksapceToolStripMenuItem.Text = "Open Worksapce";
-            // 
             // tileDisplay1
             // 
             this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -504,6 +543,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAlpha)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,6 +597,9 @@
         private System.Windows.Forms.ToolStripMenuItem quickLoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newLoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openWorksapceToolStripMenuItem;
+        private System.Windows.Forms.RadioButton radioEarseColl;
+        private System.Windows.Forms.RadioButton radioSetColl;
+        private System.Windows.Forms.CheckBox checkShowCollision;
     }
 }
 

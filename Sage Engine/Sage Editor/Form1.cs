@@ -24,6 +24,7 @@ namespace Sage_Editor
         public string WorkspacePath;
         public bool workspacesheck=false;
         public Texture2D EmptyTile;
+        public Texture2D Cross;
 
         public Dictionary<string, Texture2D> dictTextures = new Dictionary<string, Texture2D>();
         public Dictionary<string, Image> dictImages = new Dictionary<string, Image>();
@@ -168,7 +169,35 @@ namespace Sage_Editor
                     cmd.Undo();
                 }
             }
+            if (keyData == System.Windows.Forms.Keys.F)
+            {
+                InvertFillCheckBox();
+            }
+            if (keyData == System.Windows.Forms.Keys.E)
+            {
+                if (radDraw.Checked)
+                {
+                    radDraw.Checked = false;
+                    radErase.Checked = true;
+                }
+                else
+                {
+                    radDraw.Checked = true;
+                    radErase.Checked = false;
+                }
+                
+            }
             return false;
+        }
+
+        private void InvertFillCheckBox()
+        {
+            if (!chekFill.Checked)
+                chekFill.Checked = true;
+            else
+            {
+                chekFill.Checked = false;
+            }
         }
 
 
@@ -180,19 +209,24 @@ namespace Sage_Editor
                 EmptyTile = Texture2D.FromStream(GraphicsDevices, stream);
             }
 
+            using (FileStream stream = new FileStream(@"Content/Cross.jpg", FileMode.Open)) 
+            {
+                Cross = Texture2D.FromStream(GraphicsDevices, stream);
+            }
+
             radDraw.Select();
             DrawEmptyTiles.Initialise(this);
 
             Mouse.WindowHandle = tileDisplay1.Handle;
 
 
-           tileDisplay1.Cursor = Cursors.Cross;
+            tileDisplay1.Cursor = Cursors.Cross;
             MouseWheel += new MouseEventHandler(Form1_MouseWheel);
             tileDisplay1.MouseHover += new EventHandler(tileDisplay1_MouseHover);
             tileDisplay1.MouseLeave += new EventHandler(tileDisplay1_MouseLeave);
-                       this.Focus();
+            this.Focus();
             CommandFactory.Initilise(this);
-           // Camera.Initialise(GraphicsDevices);
+            // Camera.Initialise(GraphicsDevices);
         }
 
        
@@ -308,41 +342,53 @@ namespace Sage_Editor
             if (mouseClickCount > 2)
             {
                 MouseState mouse = Mouse.GetState();
-
+               
                 if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                 {
-                    if (TileX != null || TileY != null)
+                    switch (tabControl1.SelectedIndex)
                     {
-                        
-                        if (chekFill.Checked)
-                        {
-                            if (radDraw.Checked)
+                        case 0:
+                            if (TileX != null || TileY != null)
                             {
-                                Command command = CommandFactory.Execute(Commands.FillCellIndex);
-                                ExcuteCommands(command);
+
+                                if (chekFill.Checked)
+                                {
+                                    if (radDraw.Checked)
+                                    {
+                                        Command command = CommandFactory.Execute(Commands.FillCellIndex);
+                                        ExcuteCommands(command);
+                                    }
+                                    else
+                                    {
+                                        Command command = CommandFactory.Execute(Commands.FillCellErase);
+                                        ExcuteCommands(command);
+                                    }
+                                }
+                                else
+                                {
+                                    if (radDraw.Checked)
+                                    {
+                                        Command command = CommandFactory.Execute(Commands.SetTileCommand);
+                                        ExcuteCommands(command);
+                                    }
+                                    else
+                                    {
+                                        Command command = CommandFactory.Execute(Commands.EraseCellCommand);
+                                        ExcuteCommands(command);
+                                    }
+                                }
                             }
-                            else
-                            {
-                                Command command = CommandFactory.Execute(Commands.FillCellErase);
-                                ExcuteCommands(command);
-                            }
-                        }
-                        else 
-                        {
-                            if (radDraw.Checked)
-                            {
-                                Command command = CommandFactory.Execute(Commands.SetTileCommand);
-                                ExcuteCommands(command);
-                            }
-                            else
-                            {
-                                Command command = CommandFactory.Execute(Commands.EraseCellCommand);
-                                ExcuteCommands(command);
-                            }
-                        }
+
+                            mouseClickCount = 0;
+                            break;
+
+                        case 1:
+
+                            break;
                     }
-                }
-                mouseClickCount = 0;
+                   }
+                    
+                    
             }
             else
             {
@@ -460,33 +506,52 @@ namespace Sage_Editor
                     foreach (string path in openFileDialog1.FileNames)
                     {
                         Path = path;
-
-                        FileStream stream = new FileStream(Path, FileMode.Open);
-
-                        Texture2D text = Texture2D.FromStream(GraphicsDevices, stream);
-                        Image img = Image.FromStream(stream);
-
-                        string TextureNameToBeSaved = path.Substring(texPathAddress.Text.Length);
-
-
-                        //string[] FileNames = Path.Split('\\');
-                        //string FileName = FileNames[FileNames.Length - 1];
-                        //string[] tmpFileName = FileName.Split('.');
-                        //string FileNameMod = tmpFileName[0];
-
-                        currentLayer.AddTexture(text);
-                        foreach (TileLayer layer in Map.Layers)
+                        Texture2D text;
+                        Image img;
+                        try
                         {
-                            if (layer.HasTexture(text) == -1)
-                            {
-                                layer.AddTexture(text);
-                            }
-                        }
-                        dictTextures[TextureNameToBeSaved] = text;
-                        dictImages[TextureNameToBeSaved] = img;
+                            FileStream stream = new FileStream(Path, FileMode.Open);
 
-                        TextureList.Items.Add(TextureNameToBeSaved);
-                        stream.Dispose();
+                             text = Texture2D.FromStream(GraphicsDevices, stream);
+                             img = Image.FromStream(stream);
+                             stream.Close();
+                             stream.Dispose();
+
+                             string TextureNameToBeSaved = "";
+                             try
+                             {
+                                 TextureNameToBeSaved = path.Substring(texPathAddress.Text.Length);
+                             }
+                             catch (ArgumentOutOfRangeException ex)
+                             {
+                                 MessageBox.Show("Texture Was Not Found In Content Directory, Cannot Load Texture");
+                                 return;
+                             }
+
+
+                             currentLayer.AddTexture(text);
+                             foreach (TileLayer layer in Map.Layers)
+                             {
+                                 if (layer.HasTexture(text) == -1)
+                                 {
+                                     layer.AddTexture(text);
+                                 }
+                             }
+                             dictTextures[TextureNameToBeSaved] = text;
+                             dictImages[TextureNameToBeSaved] = img;
+
+                             TextureList.Items.Add(TextureNameToBeSaved);
+                       
+                       }
+
+                        catch(IOException ex)
+                       {
+                           MessageBox.Show("The File: " + Path + "Is already Added", "Error");
+                       }
+
+
+                       
+                      
                     }
                 }
             }
@@ -516,7 +581,7 @@ namespace Sage_Editor
                     Texture2D textureToBeRemoved = dictTextures[TextureList.SelectedItem as string];
                     dictTextures.Remove(TextureList.SelectedItem as string);
                     dictImages.Remove(TextureList.SelectedItem as string);
-
+                    pictureBox1.Image = null;
                     TextureList.Items.Remove(TextureList.SelectedItem);
 
                     foreach (TileLayer layer in Map.Layers)
@@ -524,6 +589,7 @@ namespace Sage_Editor
                         int TextureIndex = layer.HasTexture(textureToBeRemoved);
                         layer.RemoveTexture(TextureIndex);
                     }
+                    ExcutedCommands.Clear(); 
                 }
             }
             else
@@ -545,66 +611,28 @@ namespace Sage_Editor
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
 
 #endregion 
 
 
         string SaveLayerPath = "";
-        private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.InitialDirectory = WorkspacePath;
-            saveFileDialog1.OverwritePrompt = true;
-            saveFileDialog1.FileName = LayerList.SelectedItem as string;
-            saveFileDialog1.DefaultExt = "layer";
-            saveFileDialog1.Filter = "Layer|*.layer";
-            if ((currentLayer != null) && (LayerList.SelectedItem as string != null))
-            {
-                if ((SaveLayerPath == "") && (saveFileDialog1.ShowDialog() == DialogResult.OK))
-                {
-                    SaveLayerPath = saveFileDialog1.FileName;
-                }
-
-                if (SaveLayerPath != "")
-                {
-                    string[] textureList = new string[TextureList.Items.Count];
-
-                    for (int i = 0; i < TextureList.Items.Count; i++)
-                    {
-                        textureList[i] = (string)TextureList.Items[i];
-                    }
-
-                    currentLayer.ReadOutLayer(SaveLayerPath,texPathAddress.Text ,textureList, dictTextures, LayerList.SelectedItem as string);
-                }
-            }
-        }
+      
 
         string[] Extensions = new string[]
         {
             ".jpg", "png"
         };
 
+        #region ButtonEventHandler
+      
         private void loadLayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-           
         }
-
         private void texPathAddress_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void barAlpha_Scroll(object sender, EventArgs e)
-        {
-            if (currentLayer != null)
-            {
-                float alph = ((float)barAlpha.Value) / 100.0f;
-                currentLayer.Alpha = alph;
-            }
-        }
-
         private void quickLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog2.InitialDirectory = WorkspacePath;
@@ -659,7 +687,6 @@ namespace Sage_Editor
                 }
             }
         }
-
         private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             while (string.IsNullOrEmpty(texPathAddress.Text))
@@ -674,13 +701,13 @@ namespace Sage_Editor
                 else if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
-                }else
-
+                }
+                else
                 {
                     MessageBox.Show("Please Choose A Content Directory");
                 }
             }
-            
+
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer,*.map,*.xml";
 
             openFileDialog2.InitialDirectory = WorkspacePath;
@@ -710,6 +737,7 @@ namespace Sage_Editor
                         FileStream stream = new FileStream(texPathAddress.Text + "\\" + texturespaths.Value + extensFound, FileMode.Open);
                         Texture2D texture = Texture2D.FromStream(GraphicsDevices, stream);
                         layer.AddTexture(texture);
+                        stream.Close();
                         stream.Dispose();
                         if (!dictTextures.ContainsKey(texturespaths.Value))
                         {
@@ -734,10 +762,56 @@ namespace Sage_Editor
                 }
             }
         }
+        private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = WorkspacePath;
+            saveFileDialog1.OverwritePrompt = true;
+            saveFileDialog1.FileName = LayerList.SelectedItem as string;
+            saveFileDialog1.DefaultExt = "layer";
+            saveFileDialog1.Filter = "Layer|*.layer";
+            if ((currentLayer != null) && (LayerList.SelectedItem as string != null))
+            {
+                if ((SaveLayerPath == "") && (saveFileDialog1.ShowDialog() == DialogResult.OK))
+                {
+                    SaveLayerPath = saveFileDialog1.FileName;
+                }
 
+                if (SaveLayerPath != "")
+                {
+                    string[] textureList = new string[TextureList.Items.Count];
+
+                    for (int i = 0; i < TextureList.Items.Count; i++)
+                    {
+                        textureList[i] = (string)TextureList.Items[i];
+                    }
+
+                    currentLayer.ReadOutLayer(SaveLayerPath, texPathAddress.Text, textureList, dictTextures, LayerList.SelectedItem as string);
+                }
+            }
+        }
+        
+        #endregion
+
+
+
+      
+        #region HelperEventHandlers
+
+        private void barAlpha_Scroll(object sender, EventArgs e)
+        {
+            if (currentLayer != null)
+            {
+                float alph = ((float)barAlpha.Value) / 100.0f;
+                currentLayer.Alpha = alph;
+            }
+        }
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-
         }
+
+        #endregion
+
+
     }
+
 }
