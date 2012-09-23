@@ -37,7 +37,6 @@
             this.saveAllLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +46,9 @@
             this.saveAsLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitBitchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -87,7 +89,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
@@ -127,45 +130,37 @@
             // saveLayerToolStripMenuItem
             // 
             this.saveLayerToolStripMenuItem.Name = "saveLayerToolStripMenuItem";
-            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveLayerToolStripMenuItem.Text = "Save Layer";
             this.saveLayerToolStripMenuItem.Click += new System.EventHandler(this.saveLayerToolStripMenuItem_Click);
             // 
             // saveAsLayerToolStripMenuItem
             // 
             this.saveAsLayerToolStripMenuItem.Name = "saveAsLayerToolStripMenuItem";
-            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsLayerToolStripMenuItem.Text = "SaveAs Layer";
             // 
             // saveAllLayerToolStripMenuItem
             // 
             this.saveAllLayerToolStripMenuItem.Name = "saveAllLayerToolStripMenuItem";
-            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAllLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAllLayerToolStripMenuItem.Text = "Save All Layer";
             // 
             // loadLayerToolStripMenuItem
             // 
             this.loadLayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quickLoadToolStripMenuItem,
-            this.newLoadToolStripMenuItem});
+            this.quickLoadToolStripMenuItem});
             this.loadLayerToolStripMenuItem.Name = "loadLayerToolStripMenuItem";
-            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.loadLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadLayerToolStripMenuItem.Text = "Load Layer";
             this.loadLayerToolStripMenuItem.Click += new System.EventHandler(this.loadLayerToolStripMenuItem_Click);
             // 
             // quickLoadToolStripMenuItem
             // 
             this.quickLoadToolStripMenuItem.Name = "quickLoadToolStripMenuItem";
-            this.quickLoadToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.quickLoadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quickLoadToolStripMenuItem.Text = "QuickLoad";
             this.quickLoadToolStripMenuItem.Click += new System.EventHandler(this.quickLoadToolStripMenuItem_Click);
-            // 
-            // newLoadToolStripMenuItem
-            // 
-            this.newLoadToolStripMenuItem.Name = "newLoadToolStripMenuItem";
-            this.newLoadToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.newLoadToolStripMenuItem.Text = "New Load";
-            this.newLoadToolStripMenuItem.Click += new System.EventHandler(this.newLoadToolStripMenuItem_Click);
             // 
             // mapToolStripMenuItem
             // 
@@ -180,20 +175,22 @@
             // saveMapToolStripMenuItem
             // 
             this.saveMapToolStripMenuItem.Name = "saveMapToolStripMenuItem";
-            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMapToolStripMenuItem.Text = "Save Map";
+            this.saveMapToolStripMenuItem.Click += new System.EventHandler(this.saveMapToolStripMenuItem_Click);
             // 
             // saveAsMapToolStripMenuItem
             // 
             this.saveAsMapToolStripMenuItem.Name = "saveAsMapToolStripMenuItem";
-            this.saveAsMapToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.saveAsMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsMapToolStripMenuItem.Text = "SaveAs Map";
             // 
             // loadMapToolStripMenuItem
             // 
             this.loadMapToolStripMenuItem.Name = "loadMapToolStripMenuItem";
-            this.loadMapToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.loadMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadMapToolStripMenuItem.Text = "Load Map";
+            this.loadMapToolStripMenuItem.Click += new System.EventHandler(this.loadMapToolStripMenuItem_Click);
             // 
             // levelToolStripMenuItem
             // 
@@ -229,6 +226,29 @@
             this.exitBitchesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.exitBitchesToolStripMenuItem.Text = "Exit (Bitches)";
             this.exitBitchesToolStripMenuItem.Click += new System.EventHandler(this.exitBitchesToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomInToolStripMenuItem,
+            this.zoomOutToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // zoomInToolStripMenuItem
+            // 
+            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.zoomInToolStripMenuItem.Text = "Zoom In";
+            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+            // 
+            // zoomOutToolStripMenuItem
+            // 
+            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
+            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -317,7 +337,7 @@
             // barAlpha
             // 
             this.barAlpha.Enabled = false;
-            this.barAlpha.Location = new System.Drawing.Point(23, 67);
+            this.barAlpha.Location = new System.Drawing.Point(23, 112);
             this.barAlpha.Maximum = 100;
             this.barAlpha.Name = "barAlpha";
             this.barAlpha.Size = new System.Drawing.Size(278, 45);
@@ -327,7 +347,7 @@
             // btnRemoveLayer
             // 
             this.btnRemoveLayer.Enabled = false;
-            this.btnRemoveLayer.Location = new System.Drawing.Point(181, 229);
+            this.btnRemoveLayer.Location = new System.Drawing.Point(181, 272);
             this.btnRemoveLayer.Name = "btnRemoveLayer";
             this.btnRemoveLayer.Size = new System.Drawing.Size(94, 23);
             this.btnRemoveLayer.TabIndex = 4;
@@ -338,7 +358,7 @@
             // btnRemoveTexture
             // 
             this.btnRemoveTexture.Enabled = false;
-            this.btnRemoveTexture.Location = new System.Drawing.Point(181, 380);
+            this.btnRemoveTexture.Location = new System.Drawing.Point(181, 389);
             this.btnRemoveTexture.Name = "btnRemoveTexture";
             this.btnRemoveTexture.Size = new System.Drawing.Size(94, 23);
             this.btnRemoveTexture.TabIndex = 4;
@@ -349,7 +369,7 @@
             // btnAddLayer
             // 
             this.btnAddLayer.Enabled = false;
-            this.btnAddLayer.Location = new System.Drawing.Point(54, 229);
+            this.btnAddLayer.Location = new System.Drawing.Point(54, 272);
             this.btnAddLayer.Name = "btnAddLayer";
             this.btnAddLayer.Size = new System.Drawing.Size(91, 23);
             this.btnAddLayer.TabIndex = 3;
@@ -360,7 +380,7 @@
             // btnAddTexture
             // 
             this.btnAddTexture.Enabled = false;
-            this.btnAddTexture.Location = new System.Drawing.Point(54, 380);
+            this.btnAddTexture.Location = new System.Drawing.Point(54, 389);
             this.btnAddTexture.Name = "btnAddTexture";
             this.btnAddTexture.Size = new System.Drawing.Size(91, 23);
             this.btnAddTexture.TabIndex = 3;
@@ -372,7 +392,7 @@
             // 
             this.LayerList.Enabled = false;
             this.LayerList.FormattingEnabled = true;
-            this.LayerList.Location = new System.Drawing.Point(23, 132);
+            this.LayerList.Location = new System.Drawing.Point(23, 184);
             this.LayerList.Name = "LayerList";
             this.LayerList.Size = new System.Drawing.Size(278, 82);
             this.LayerList.TabIndex = 2;
@@ -382,7 +402,7 @@
             // 
             this.TextureList.Enabled = false;
             this.TextureList.FormattingEnabled = true;
-            this.TextureList.Location = new System.Drawing.Point(23, 276);
+            this.TextureList.Location = new System.Drawing.Point(23, 301);
             this.TextureList.Name = "TextureList";
             this.TextureList.Size = new System.Drawing.Size(278, 82);
             this.TextureList.TabIndex = 2;
@@ -427,13 +447,13 @@
             this.radioEarseColl.Name = "radioEarseColl";
             this.radioEarseColl.Size = new System.Drawing.Size(93, 17);
             this.radioEarseColl.TabIndex = 1;
-            this.radioEarseColl.TabStop = true;
             this.radioEarseColl.Text = "Erase Collision";
             this.radioEarseColl.UseVisualStyleBackColor = true;
             // 
             // radioSetColl
             // 
             this.radioSetColl.AutoSize = true;
+            this.radioSetColl.Checked = true;
             this.radioSetColl.Location = new System.Drawing.Point(29, 77);
             this.radioSetColl.Name = "radioSetColl";
             this.radioSetColl.Size = new System.Drawing.Size(82, 17);
@@ -441,16 +461,20 @@
             this.radioSetColl.TabStop = true;
             this.radioSetColl.Text = "Set Collision";
             this.radioSetColl.UseVisualStyleBackColor = true;
+            this.radioSetColl.CheckedChanged += new System.EventHandler(this.radioSetColl_CheckedChanged);
             // 
             // checkShowCollision
             // 
             this.checkShowCollision.AutoSize = true;
+            this.checkShowCollision.Checked = true;
+            this.checkShowCollision.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkShowCollision.Location = new System.Drawing.Point(29, 37);
             this.checkShowCollision.Name = "checkShowCollision";
             this.checkShowCollision.Size = new System.Drawing.Size(123, 17);
             this.checkShowCollision.TabIndex = 0;
             this.checkShowCollision.Text = "Show CollidableTiles";
             this.checkShowCollision.UseVisualStyleBackColor = true;
+            this.checkShowCollision.CheckedChanged += new System.EventHandler(this.checkShowCollision_CheckedChanged);
             // 
             // tabPage3
             // 
@@ -595,11 +619,13 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.ToolStripMenuItem quickLoadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newLoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openWorksapceToolStripMenuItem;
         private System.Windows.Forms.RadioButton radioEarseColl;
         private System.Windows.Forms.RadioButton radioSetColl;
-        private System.Windows.Forms.CheckBox checkShowCollision;
+        public System.Windows.Forms.CheckBox checkShowCollision;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
     }
 }
 

@@ -8,25 +8,14 @@ using Microsoft.Xna.Framework;
 namespace Sage_Engine
 {
 
-    public enum DirectionFacing
-    {
-        Up,
-        UpRight,
-        Right,
-        DownRight,
-        Down,
-        DownLeft,
-        Left,
-        Upleft,
-    }
-
    public abstract class DrawAble
    {
        #region Variables
        protected SpriteAnimation spriteAnimation;
        protected Vector2 location; //Location is now always in world Co-ordinates.
-       protected Vector2 direction;
-       protected float speed;
+       protected Vector2 direction; // The Direction We want to Move in. The Location we are facing is calulated from this Direction.
+       protected float speed; // We Multiply Direction by speed to move in a specific Direction.
+                                //Speed is in Pixels persecond.
        protected float rotation;
 
        protected int CollisonXoffset;
@@ -37,6 +26,18 @@ namespace Sage_Engine
        
        #region Properties
 
+
+       public Vector2 Location
+       {
+           get
+           {
+               return location;
+           }
+           set
+           {
+               location = value;
+           }
+       }
 
        /// <summary>
        /// Speed given is pixels moved per second instead of the conventional Pixels moved per frame.

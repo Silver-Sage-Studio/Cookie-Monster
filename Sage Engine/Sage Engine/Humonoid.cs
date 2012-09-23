@@ -7,6 +7,18 @@ using Microsoft.Xna.Framework;
 
 namespace Sage_Engine
 {
+    public enum DirectionFacing
+    {
+        Up,
+        UpRight,
+        Right,
+        DownRight,
+        Down,
+        DownLeft,
+        Left,
+        Upleft,
+    }
+
     public abstract class Humonoid : DrawAble
     {
         protected int health;
@@ -14,8 +26,10 @@ namespace Sage_Engine
         protected float manaRegen;
         protected Vector2 OldLocation;
         protected DirectionFacing directionFacing;
-      
 
+
+       
+      
         public Humonoid(SpriteAnimation spriteAnimation,
            Vector2 location,
            Vector2 speed,
@@ -23,7 +37,6 @@ namespace Sage_Engine
             : base(spriteAnimation, location, speed, collisionRadius)
         { 
         }
-
 
         #region Properties
         public int Health
@@ -75,6 +88,34 @@ namespace Sage_Engine
                 else
                 {
                     mana = 100;
+                }
+            }
+        }
+
+        private void CalculateDirectionFacing(Vector2 DirectionToFace)
+        {
+            Vector2 location = Location;
+
+            if ((location != null) && (DirectionToFace != null))
+            {
+                float Angle = (float)Math.Atan2((location.Y - DirectionToFace.Y),
+                    (location.X - DirectionToFace.X));
+
+                if ((Angle > 0) && (Angle < MathHelper.PiOver4))
+                {
+                    directionFacing = DirectionFacing.UpRight;
+                }
+                else if( (Angle > MathHelper.PiOver4) && (Angle < MathHelper.PiOver2) )
+                {
+                    directionFacing = DirectionFacing.Up;
+                }
+                else if(( Angle > MathHelper.PiOver2) && ( Angle < 0.75* MathHelper.Pi))
+                {
+                    directionFacing = DirectionFacing.Upleft;
+                }
+                else if ((Angle < MathHelper.Pi) && (Angle > 0.75 * MathHelper.Pi))
+                {
+                    directionFacing = DirectionFacing.Left;
                 }
             }
         }

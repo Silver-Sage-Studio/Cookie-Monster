@@ -15,12 +15,14 @@ namespace Sage_Engine
     public class TileLayer
     {
 
-        #region Variables
+        
+#region Variables
 
         int[,] layer;
         List<Texture2D> textureList = new List<Texture2D>();
 
         float alpha = 1f;
+        String Name=null;
 
         /// <summary>
         /// Change These According to the tile Height and width Must Be Same for all classes. Setters and getters included Below.
@@ -31,11 +33,20 @@ namespace Sage_Engine
 
         #endregion
 
-
         #region Properties/GetterSetter
 
         //Setter and getter for Alpha Transparecnt value of the layer.
 
+
+        public string LayerName {
+            get {
+                return Name;
+            }
+            set {
+                Name = value;
+            }
+
+        }
 
         public List<Texture2D> TexturesList
         {
@@ -101,8 +112,6 @@ namespace Sage_Engine
             }
 
         }
-
-
 
         public static int GetTileHeight
         {
@@ -362,17 +371,22 @@ namespace Sage_Engine
         }
 
 
-        public static TileLayer ReadInLayer(string fileName, out Dictionary<int, string> textureNames, out string LayerName,out string ContentPath)
+        public static TileLayer ReadInLayer(string fileName, out Dictionary<int, string> textureNames)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileName);
+            return ReadInLayer(doc.DocumentElement, out textureNames);
+           }
+        
+        public static TileLayer ReadInLayer(XmlNode doc, out Dictionary<int, string> textureNames)
         {
             TileLayer layerToReturn = null;
             Dictionary<int, string> dicToReturn = new Dictionary<int,string>();
             float layerAlpha=1.0f;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(fileName);
-            
-            XmlNode BaseNode = doc.DocumentElement;
-            LayerName = BaseNode.Attributes["Name"].Value;
-            ContentPath = BaseNode.Attributes["ContentPath"].Value;
+
+
+            XmlNode BaseNode = doc;
+           
             foreach (XmlNode node in BaseNode.ChildNodes)
             {
                 if (node.Name == "Textures")
@@ -418,6 +432,7 @@ namespace Sage_Engine
                 }
             } //ForEach Loop Ends Having Read in Everything.
             layerToReturn.Alpha = layerAlpha;
+            layerToReturn.LayerName = BaseNode.Attributes["Name"].Value;
             textureNames = dicToReturn;
             return layerToReturn;
         }
@@ -472,5 +487,17 @@ namespace Sage_Engine
         }
         
         #endregion
+
+        public void AddTextures(ContentManager manager, string[] TextureNames)
+        {
+            foreach (string Texture in TextureNames)
+            {
+                Texture2D tex = manager.Load<Texture2D>(Texture);
+                textureList.Add(tex);
+            }
+        }
     }
+
+
+    
 }

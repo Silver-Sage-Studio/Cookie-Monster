@@ -14,15 +14,15 @@ using System.Reflection;
 namespace Sage_Editor
 {
     using Image = System.Drawing.Image;
-    
+
     public partial class Form1 : Form
     {
-        
+
         #region Variables
-    
+
         public SpriteBatch spriteBatch;
         public string WorkspacePath;
-        public bool workspacesheck=false;
+        public bool workspacesheck = false;
         public Texture2D EmptyTile;
         public Texture2D Cross;
 
@@ -34,9 +34,8 @@ namespace Sage_Editor
         public TileMap Map = new TileMap();
         public TileLayer currentLayer;
 
-       public Stack<Command> ExcutedCommands = new Stack<Command>();
-       public Command PreviousCommand = null;
-
+        public Stack<Command> ExcutedCommands = new Stack<Command>();
+        public Command PreviousCommand = null;
 
         int? mouseX = null;
         int? mouseY = null;
@@ -44,7 +43,7 @@ namespace Sage_Editor
         public int? TileX = null;
         public int? TileY = null;
         bool Hovering;
-        
+
 
         #endregion
 
@@ -65,15 +64,15 @@ namespace Sage_Editor
         public Form1()
         {
             InitializeComponent();
-            
-           
+
+
             //while (string.IsNullOrEmpty(texPathAddress.Text))
             //{
             //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             //    {
             //        texPathAddress.Text = folderBrowserDialog1.SelectedPath;
             //        this.WindowState = FormWindowState.Maximized;
-                    
+
             //        activateControls();
             //    }
             //    else
@@ -92,7 +91,7 @@ namespace Sage_Editor
 
             while (!(Directory.Exists(@"C:\SilverSages")))
             {
-               
+
                 MessageBox.Show("ContentPath Not Found Please Browse To your contentFolder", "Path Not Found");
 
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -132,8 +131,6 @@ namespace Sage_Editor
             this.WindowState = FormWindowState.Maximized;
             activateControls();
 
-
-            
             tileDisplay1.OnInitialise += new EventHandler(tileDisplay1_OnInitialise);
             tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
 
@@ -161,7 +158,7 @@ namespace Sage_Editor
 
         protected override bool ProcessCmdKey(ref Message msg, System.Windows.Forms.Keys keyData)
         {
-            if(keyData == (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z))
+            if (keyData == (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z))
             {
                 if (ExcutedCommands.Count > 0)
                 {
@@ -169,10 +166,25 @@ namespace Sage_Editor
                     cmd.Undo();
                 }
             }
+
+            if (keyData == (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up))
+            {
+                TileLayer.SetTileHeight = TileLayer.GetTileHeight + 16;
+                TileLayer.SetTileWidth = TileLayer.GetTileWidth + 16;
+            }
+
+
+            if (keyData == (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down))
+            {
+                TileLayer.SetTileHeight = TileLayer.GetTileHeight - 16;
+                TileLayer.SetTileWidth = TileLayer.GetTileWidth - 16;
+            }
+
             if (keyData == System.Windows.Forms.Keys.F)
             {
                 InvertFillCheckBox();
             }
+
             if (keyData == System.Windows.Forms.Keys.E)
             {
                 if (radDraw.Checked)
@@ -185,8 +197,8 @@ namespace Sage_Editor
                     radDraw.Checked = true;
                     radErase.Checked = false;
                 }
-                
             }
+
             return false;
         }
 
@@ -209,7 +221,7 @@ namespace Sage_Editor
                 EmptyTile = Texture2D.FromStream(GraphicsDevices, stream);
             }
 
-            using (FileStream stream = new FileStream(@"Content/Cross.jpg", FileMode.Open)) 
+            using (FileStream stream = new FileStream(@"Content/Cross.png", FileMode.Open))
             {
                 Cross = Texture2D.FromStream(GraphicsDevices, stream);
             }
@@ -229,18 +241,17 @@ namespace Sage_Editor
             // Camera.Initialise(GraphicsDevices);
         }
 
-       
 
         #endregion
 
-       
+
         #region DrawingCode
 
         public void tileDisplay1_OnDraw(object sender, EventArgs e)
         {
             vScrollBar1.Location = new System.Drawing.Point(tileDisplay1.Location.X + tileDisplay1.Size.Width, vScrollBar1.Location.Y);
             Logic();
-            Render();   
+            Render();
         }
 
         private void Render()
@@ -290,7 +301,6 @@ namespace Sage_Editor
             }
         }
 
-
         private void Logic()
         {
             Camera.Position = new Vector2(hScrollBar1.Value * 4, vScrollBar1.Value * 4);
@@ -330,7 +340,7 @@ namespace Sage_Editor
                 command.Excute();
                 if (!command.CompareTo(PreviousCommand))
                 {
-                    
+
                     ExcutedCommands.Push(command);
                 }
             }
@@ -342,7 +352,7 @@ namespace Sage_Editor
             if (mouseClickCount > 2)
             {
                 MouseState mouse = Mouse.GetState();
-               
+
                 if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                 {
                     switch (tabControl1.SelectedIndex)
@@ -383,12 +393,20 @@ namespace Sage_Editor
                             break;
 
                         case 1:
+                            if (radioSetColl.Checked == true)
+                            {
+                                if ((TileX != null) && (TileY != null))
+                                    Map.SetCollisionTile((int)TileX, (int)TileY, 1);
+                            }
+                            else
+                            {
+                                if ((TileX != null) && (TileY != null))
+                                    Map.SetCollisionTile((int)TileX, (int)TileY, 0);
+                            }
 
                             break;
                     }
-                   }
-                    
-                    
+                }
             }
             else
             {
@@ -431,8 +449,6 @@ namespace Sage_Editor
         {
             Hovering = true;
         }
-
-
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
@@ -512,46 +528,46 @@ namespace Sage_Editor
                         {
                             FileStream stream = new FileStream(Path, FileMode.Open);
 
-                             text = Texture2D.FromStream(GraphicsDevices, stream);
-                             img = Image.FromStream(stream);
-                             stream.Close();
-                             stream.Dispose();
+                            text = Texture2D.FromStream(GraphicsDevices, stream);
+                            img = Image.FromStream(stream);
+                            stream.Close();
+                            stream.Dispose();
 
-                             string TextureNameToBeSaved = "";
-                             try
-                             {
-                                 TextureNameToBeSaved = path.Substring(texPathAddress.Text.Length);
-                             }
-                             catch (ArgumentOutOfRangeException ex)
-                             {
-                                 MessageBox.Show("Texture Was Not Found In Content Directory, Cannot Load Texture");
-                                 return;
-                             }
+                            string TextureNameToBeSaved = "";
+                            try
+                            {
+                                TextureNameToBeSaved = path.Substring(texPathAddress.Text.Length);
 
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                MessageBox.Show("Texture Was Not Found In Content Directory, Cannot Load Texture");
+                                return;
+                            }
 
-                             currentLayer.AddTexture(text);
-                             foreach (TileLayer layer in Map.Layers)
-                             {
-                                 if (layer.HasTexture(text) == -1)
-                                 {
-                                     layer.AddTexture(text);
-                                 }
-                             }
-                             dictTextures[TextureNameToBeSaved] = text;
-                             dictImages[TextureNameToBeSaved] = img;
+                            currentLayer.AddTexture(text);
+                            foreach (TileLayer layer in Map.Layers)
+                            {
+                                if (layer.HasTexture(text) == -1)
+                                {
+                                    layer.AddTexture(text);
+                                }
+                            }
 
-                             TextureList.Items.Add(TextureNameToBeSaved);
-                       
-                       }
+                            string[] TextureNameSplit = TextureNameToBeSaved.Split('.');
+                            string textureNameToWriteOut = TextureNameSplit[0];
+                            textureNameToWriteOut = textureNameToWriteOut.Substring(1);
 
-                        catch(IOException ex)
-                       {
-                           MessageBox.Show("The File: " + Path + "Is already Added", "Error");
-                       }
+                            dictTextures[textureNameToWriteOut] = text;
+                            dictImages[textureNameToWriteOut] = img;
 
+                            TextureList.Items.Add(textureNameToWriteOut);
+                        }
 
-                       
-                      
+                        catch (IOException ex)
+                        {
+                            MessageBox.Show("The File: " + Path + "Is already Added", "Error");
+                        }
                     }
                 }
             }
@@ -561,12 +577,10 @@ namespace Sage_Editor
             }
         }
 
-
-
         private void TextureList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(TextureList.SelectedItem != null)
-            pictureBox1.Image = dictImages[TextureList.SelectedItem as string];
+            if (TextureList.SelectedItem != null)
+                pictureBox1.Image = dictImages[TextureList.SelectedItem as string];
         }
 
         private void btnRemoveTexture_Click(object sender, EventArgs e)
@@ -589,7 +603,7 @@ namespace Sage_Editor
                         int TextureIndex = layer.HasTexture(textureToBeRemoved);
                         layer.RemoveTexture(TextureIndex);
                     }
-                    ExcutedCommands.Clear(); 
+                    ExcutedCommands.Clear();
                 }
             }
             else
@@ -602,10 +616,19 @@ namespace Sage_Editor
         {
             if (LayerList.SelectedItem != null)
             {
-                currentLayer = null;
+
+                //currentLayer = null;
+
+
                 Map.RemoveLayer(dictLayer[LayerList.SelectedItem as string]);
                 dictLayer.Remove(LayerList.SelectedItem as string);
                 LayerList.Items.Remove(LayerList.SelectedItem);
+
+                if (LayerList.Items.Count > 0)
+                {
+                    currentLayer = dictLayer[LayerList.Items[0].ToString()];
+                    LayerList.SetSelected(0, true);
+                }
             }
         }
 
@@ -613,11 +636,11 @@ namespace Sage_Editor
         {
         }
 
-#endregion 
+        #endregion
 
 
         string SaveLayerPath = "";
-      
+
 
         string[] Extensions = new string[]
         {
@@ -625,7 +648,7 @@ namespace Sage_Editor
         };
 
         #region ButtonEventHandler
-      
+
         private void loadLayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
@@ -639,15 +662,15 @@ namespace Sage_Editor
             openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer;*.map;*.xml";
             Dictionary<int, string> texturesToLoad;
             string NameOfLayer;
-            string ContentPath;
+
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                TileLayer layer = TileLayer.ReadInLayer(openFileDialog2.FileName, out texturesToLoad, out NameOfLayer, out ContentPath);
+                TileLayer layer = TileLayer.ReadInLayer(openFileDialog2.FileName, out texturesToLoad);
+                NameOfLayer = layer.LayerName;
                 string extensFound = "";
 
                 try
                 {
-                    texPathAddress.Text = ContentPath;
                     foreach (KeyValuePair<int, string> texturespaths in texturesToLoad)
                     {
                         foreach (string ext in Extensions)
@@ -687,81 +710,8 @@ namespace Sage_Editor
                 }
             }
         }
-        private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            while (string.IsNullOrEmpty(texPathAddress.Text))
-            {
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    texPathAddress.Text = folderBrowserDialog1.SelectedPath;
-                    this.WindowState = FormWindowState.Maximized;
 
-                    activateControls();
-                }
-                else if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Please Choose A Content Directory");
-                }
-            }
 
-            openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer,*.map,*.xml";
-
-            openFileDialog2.InitialDirectory = WorkspacePath;
-            openFileDialog2.Filter = "Layer File|*.layer|Map File|*.map|Xml File|*.xml|All Supported Files|*.layer;*.map;*.xml";
-
-            Dictionary<int, string> texturesToLoad;
-            string NameOfLayer;
-            string ContentPath;
-            if (openFileDialog2.ShowDialog() == DialogResult.OK)
-            {
-                TileLayer layer = TileLayer.ReadInLayer(openFileDialog2.FileName, out texturesToLoad, out NameOfLayer, out ContentPath);
-                string extensFound = "";
-
-                try
-                {
-                    foreach (KeyValuePair<int, string> texturespaths in texturesToLoad)
-                    {
-                        foreach (string ext in Extensions)
-                        {
-                            if (File.Exists(texPathAddress.Text + "\\" + texturespaths.Value + ext))
-                            {
-                                extensFound = ext;
-                                break;
-                            }
-                        }
-
-                        FileStream stream = new FileStream(texPathAddress.Text + "\\" + texturespaths.Value + extensFound, FileMode.Open);
-                        Texture2D texture = Texture2D.FromStream(GraphicsDevices, stream);
-                        layer.AddTexture(texture);
-                        stream.Close();
-                        stream.Dispose();
-                        if (!dictTextures.ContainsKey(texturespaths.Value))
-                        {
-                            TextureList.Items.Add(texturespaths.Value);
-                            dictTextures.Add(texturespaths.Value, texture);
-                            Image img = Image.FromFile(texPathAddress.Text + "\\" + texturespaths.Value + extensFound);
-                            dictImages.Add(texturespaths.Value, img);
-                        }
-                    }
-                    dictLayer[NameOfLayer] = layer;
-                    Map.Addlayer(layer);
-                    LayerList.Items.Add(NameOfLayer);
-                    currentLayer = layer;
-                    LayerList.SelectedIndex = LayerList.Items.Count - 1;
-                }
-                catch (FileNotFoundException ex)
-                {
-                    MessageBox.Show("Cannot Load Layer File. the texure: " +
-                        ex.FileName +
-                        " Could not be found in the content folder you have chosen. Content Folder Selector button has been enabled, you have can choose another Directory that has the resource you are trying to load.", "RESOURCE FILE NOT FOUND");
-                    btnAddFiles.Enabled = true;
-                }
-            }
-        }
         private void saveLayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.InitialDirectory = WorkspacePath;
@@ -789,12 +739,12 @@ namespace Sage_Editor
                 }
             }
         }
-        
+
         #endregion
 
 
 
-      
+
         #region HelperEventHandlers
 
         private void barAlpha_Scroll(object sender, EventArgs e)
@@ -811,7 +761,160 @@ namespace Sage_Editor
 
         #endregion
 
+        private void radioSetColl_CheckedChanged(object sender, EventArgs e)
+        {
 
+
+        }
+
+        private void checkShowCollision_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TileLayer.SetTileHeight = TileLayer.GetTileHeight + 16;
+            TileLayer.SetTileWidth = TileLayer.GetTileWidth + 16;
+        }
+
+        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TileLayer.SetTileHeight = TileLayer.GetTileHeight - 16;
+            TileLayer.SetTileWidth = TileLayer.GetTileWidth - 16;
+        }
+
+        private void saveMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = WorkspacePath;
+            saveFileDialog1.OverwritePrompt = true;
+            saveFileDialog1.FileName = LayerList.SelectedItem as string;
+            saveFileDialog1.DefaultExt = "map";
+            saveFileDialog1.Filter = "Map|*.map";
+            if ((currentLayer != null) && (LayerList.SelectedItem as string != null))
+            {
+                if ((SaveLayerPath == "") && (saveFileDialog1.ShowDialog() == DialogResult.OK))
+                {
+                    SaveLayerPath = saveFileDialog1.FileName;
+                }
+
+                if (SaveLayerPath != "")
+                {
+                    string[] textureList = new string[TextureList.Items.Count];
+
+                    for (int i = 0; i < TextureList.Items.Count; i++)
+                    {
+                        textureList[i] = (string)TextureList.Items[i];
+                    }
+
+                    string[] Layerlists = new string[LayerList.Items.Count];
+
+                    for (int i = 0; i < LayerList.Items.Count; i++)
+                    {
+                        Layerlists[i] = (string)LayerList.Items[i];
+                    }
+
+                    Map.ReadOutMap(SaveLayerPath, texPathAddress.Text, textureList, dictTextures, Layerlists);
+                }
+            }
+        }
+
+        private void newLoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            openFileDialog2.InitialDirectory = WorkspacePath;
+            openFileDialog2.Filter = "Map File|*.map|Xml File|*.xml|All Supported Files|*.map;*.xml";
+
+            Dictionary<int, string> texturesToLoad = new Dictionary<int, string>();
+            Dictionary<string,Texture2D> masterTexturesToLoad = new Dictionary<string,Texture2D>();
+
+
+
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Map = TileMap.ReadInMap(openFileDialog1.FileName, out texturesToLoad);
+            string extensFound = "";
+
+            try
+            {
+                foreach (KeyValuePair<int, string> texturespaths in texturesToLoad)
+                {
+                    foreach (string ext in Extensions)
+                    {
+                        if (File.Exists(texPathAddress.Text + "\\" + texturespaths.Value + ext))
+                        {
+                            extensFound = ext;
+                            break;
+                        }
+                    }
+
+
+
+                    FileStream stream = new FileStream(texPathAddress.Text + "\\" + texturespaths.Value + extensFound, FileMode.Open);
+
+                    Texture2D texture = Texture2D.FromStream(GraphicsDevices, stream);
+                    
+                    stream.Close();
+                    stream.Dispose();
+                    if (!masterTexturesToLoad.ContainsKey(texturespaths.Value))
+                    {
+                        masterTexturesToLoad.Add(texturespaths.Value,texture);
+                        //masterPathToLoad.Add(texturespaths.Value);
+                        
+                    }
+
+                }
+
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Cannot Load Layer File. the texure: " +
+                    ex.FileName +
+                    " Could not be found in the content folder you have chosen. Content Folder Selector button has been enabled, you have can choose another Directory that has the resource you are trying to load.", "RESOURCE FILE NOT FOUND");
+                btnAddFiles.Enabled = true;
+            }
+
+                foreach (TileLayer layer in Map.Layers)
+                {
+                    dictLayer.Add(layer.LayerName, layer);
+                    LayerList.Items.Add(layer.LayerName);
+
+                    foreach (KeyValuePair<string,Texture2D> tex in masterTexturesToLoad)
+                    {
+                    layer.AddTexture(tex.Value);
+                    }
+
+                    if (Map.Layers.IndexOf(layer) == Map.Layers.Count - 1)
+                    {
+                        foreach (KeyValuePair<string, Texture2D> tex in masterTexturesToLoad)
+                        {
+                            TextureList.Items.Add(tex.Key);
+                            dictTextures.Add(tex.Key, tex.Value);
+                            Image img = Image.FromFile(texPathAddress.Text + "\\" + tex.Key + extensFound);
+                            dictImages.Add(tex.Key, img);
+                        }
+
+
+                        
+                        currentLayer = layer;
+                        LayerList.SelectedIndex = LayerList.Items.Count - 1;
+                        activateControls();
+
+                    }
+                   
+                }
+                
+            }
+
+        }
     }
 
 }
+                          
