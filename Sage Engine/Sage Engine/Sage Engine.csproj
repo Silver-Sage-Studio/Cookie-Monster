@@ -103,8 +103,10 @@
     <Compile Include="Physics\CollisionHandler.cs" />
     <Compile Include="Physics\OnCollisonMethods\ICircleCollided.cs" />
     <Compile Include="Physics\OnCollisonMethods\IRectCollided.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Handler Classes\SoundHandler.cs" />
+    <Compile Include="SpellManager.cs" />
     <Compile Include="Spells\ConcreteSpells\SpellInterface.cs" />
     <Compile Include="Spells\WrapperSpells\WrapperInterface.cs" />
     <Compile Include="Tile Engine\Camera.cs" />

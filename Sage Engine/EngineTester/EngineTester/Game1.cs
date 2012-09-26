@@ -19,13 +19,16 @@ namespace CookieMonsterGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D nakedplayer;
+        
 
         TileMap Map;
-
+        Player player;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
   
             
         }
@@ -43,8 +46,6 @@ namespace CookieMonsterGame
             base.Initialize();
             //Map.Addlayer(new TileLayer(layer2));
 
-          
-
             Camera.Initialise(GraphicsDevice);
            
         }
@@ -56,19 +57,41 @@ namespace CookieMonsterGame
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
              Dictionary<int, string> Textures;
-
              Map = TileMap.ReadInMap(Content.RootDirectory + "/Map1.map", out Textures);
-
              string[] Strings = new string[Textures.Values.Count];
              Textures.Values.CopyTo(Strings, 0);
-
-
              foreach (TileLayer layer in Map.Layers)
              {
                  layer.AddTextures(Content, Strings);
              }
+
+            nakedplayer = Content.Load<Texture2D>("Sprites/8_way_large");
+            SpriteAnimation animation = new SpriteAnimation(nakedplayer);
+            FrameAnimation Down = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4)*0, 0, new Point(0, 0));
+            FrameAnimation DownLeft = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 1, 0, new Point(0, 0));
+            FrameAnimation Left = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 2, 0, new Point(0, 0));
+            FrameAnimation UpLeft = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 3, 0, new Point(0, 0));
+            FrameAnimation Up = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 0, (nakedplayer.Height / 2), new Point(0, 0));
+            FrameAnimation UpRight = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4 )* 1, (nakedplayer.Height / 2), new Point(0, 0));
+            FrameAnimation Right = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 2, (nakedplayer.Height / 2), new Point(0, 0));
+            FrameAnimation DownRight = new FrameAnimation(10, nakedplayer.Width / 4, nakedplayer.Height / 2, 1, (nakedplayer.Width / 4) * 3, (nakedplayer.Height / 2), new Point(0, 0));
+
+            animation.AddAnimations("Down", Down);
+            animation.AddAnimations("DownRight", DownLeft);
+            animation.AddAnimations("Right", Left);
+            animation.AddAnimations("UpRight", UpLeft);
+            animation.AddAnimations("Up", Up);
+            animation.AddAnimations("UpLeft", UpRight);
+            animation.AddAnimations("Left", Right);
+            animation.AddAnimations("DownLeft", DownRight);
+
+            player = new Player(animation, new Vector2(200,200), 30f, 0);
+
+            
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -94,25 +117,26 @@ namespace CookieMonsterGame
 
             Vector2 pos = Camera.Position;
 
-            if (InputHandler.KeyDown(Keys.S))
+            if (InputHandler.KeyDown(Keys.Up))
             {
                 pos.Y += 2;
             }
-            if (InputHandler.KeyDown(Keys.W))
+            if (InputHandler.KeyDown(Keys.Down))
             {
                 pos.Y -= 2;
             }
-            if (InputHandler.KeyDown(Keys.A))
+            if (InputHandler.KeyDown(Keys.Left))
             {
                 pos.X -= 2;
             }
-            if (InputHandler.KeyDown(Keys.D))
+            if (InputHandler.KeyDown(Keys.Right))
             {
                 pos.X += 2;
             }
-            // TODO: Add your update logic here
 
             Camera.Position = pos;
+            player.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -124,6 +148,7 @@ namespace CookieMonsterGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Map.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

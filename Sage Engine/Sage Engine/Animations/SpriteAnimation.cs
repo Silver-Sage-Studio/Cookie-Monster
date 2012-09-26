@@ -116,11 +116,16 @@ namespace Sage_Engine
 
             //Might not be wise to put Begin here for everysprite but for now lets leave it here and test.
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, Camera.TransFormMatrix);
-            spriteBatch.Draw(texture, 
-                new Rectangle(
-                    (int)location.X, (int)location.Y, CurrentAnimation.CurrentRect.Width, CurrentAnimation.CurrentRect.Height),
-                    anim.CurrentRect, Color.White, Rotation,
-                new Vector2(CurrentAnimation.CurrentRect.Width / 2, CurrentAnimation.CurrentRect.Height / 2), SpriteEffects.None, 0);
+
+           spriteBatch.Draw(texture, location, anim.CurrentRect, Color.White);
+
+            //spriteBatch.Draw(texture, 
+            //    new Rectangle(
+            //       (int)location.X, (int)location.Y, CurrentAnimation.CurrentRect.Width, CurrentAnimation.CurrentRect.Height),
+            //        anim.CurrentRect, Color.White, Rotation,
+            //    new Vector2(CurrentAnimation.CurrentRect.Width / 2, CurrentAnimation.CurrentRect.Height / 2), SpriteEffects.None, 0);
+
+            spriteBatch.End();
             ///Some Test this Code and tell me.
         }
 

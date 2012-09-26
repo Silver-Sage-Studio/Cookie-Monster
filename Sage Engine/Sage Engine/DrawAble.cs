@@ -100,6 +100,7 @@ namespace Sage_Engine
                    spriteAnimation.CurrentAnimation.CurrentRect.Height - (CollisonYoffset * 2));
            }
        }
+
        /// <summary>
        /// REturn the center of the sprite
        /// </summary>
@@ -108,7 +109,7 @@ namespace Sage_Engine
            get
            {
                return new Vector2(location.X + (spriteAnimation.CurrentAnimation.CurrentRect.Width / 2),
-                   location.Y - (spriteAnimation.CurrentAnimation.CurrentRect.Height / 2));
+                   location.Y + (spriteAnimation.CurrentAnimation.CurrentRect.Height / 2));
            }
            set
            {
@@ -142,15 +143,15 @@ namespace Sage_Engine
        /// <param name="collisionRadius"></param>
        public DrawAble(SpriteAnimation spriteAnimation,
            Vector2 location,
-           Vector2 speed,
+           float speed,
            int collisionRadius)
        {
            this.spriteAnimation = spriteAnimation;
-           this.location = location;
-           this.direction = speed;
+           this.Location = location;
+           this.speed = speed;
            this.collisionRadius = collisionRadius;
-
        }
+
        /// <summary>
        /// OverLoad Constructor with spriteAnimation , vector2 speed , vector2 speed , int collisionRadius , int collisionXOffset , int collsionsYOffset
        /// </summary>
@@ -162,14 +163,14 @@ namespace Sage_Engine
        /// <param name="collisionYoffset"></param>
        public DrawAble(SpriteAnimation spriteAnimation,
            Vector2 location,
-           Vector2 speed,
+           float speed,
            int collisionRadius,
            int collisionXoffset,
            int collisionYoffset)
        {
            this.spriteAnimation = spriteAnimation;
            this.location = location;
-           this.direction = speed;
+           this.speed = speed;
            this.collisionRadius = collisionRadius;
            this.CollisonXoffset = collisionXoffset;
            this.CollisonYoffset = collisionYoffset;

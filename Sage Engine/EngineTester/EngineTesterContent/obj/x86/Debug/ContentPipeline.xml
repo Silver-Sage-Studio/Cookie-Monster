@@ -46,6 +46,15 @@
       <Output>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Tiles\texture8.xnb</Output>
       <Time>2012-09-08T20:11:01.0215607+05:00</Time>
     </Item>
+    <Item>
+      <Source>Sprites\8_way_large.png</Source>
+      <Name>Sprites\8_way_large</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Arsinx\Documents\GitHub\Cookie-Monster\Sage Engine\EngineTester\EngineTester\bin\x86\Debug\Content\Sprites\8_way_large.xnb</Output>
+      <Time>2012-09-23T16:08:10.1532304+05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

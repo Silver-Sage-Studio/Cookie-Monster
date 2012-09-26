@@ -42,6 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprites\8_way_large.png">
+      <Name>8_way_large</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Sprites\mnt2.png">
       <Name>mnt2</Name>
       <Importer>TextureImporter</Importer>

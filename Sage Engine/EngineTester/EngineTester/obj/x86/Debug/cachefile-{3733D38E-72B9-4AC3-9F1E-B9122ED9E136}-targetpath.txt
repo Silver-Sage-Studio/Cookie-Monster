@@ -3,6 +3,7 @@ Content\Tiles\texture0.xnb
 Content\Tiles\texture1.xnb
 Content\Tiles\texture2.xnb
 Content\Tiles\texture8.xnb
+Content\Sprites\8_way_large.xnb
 Content\Tiles\texture0.jpg
 Content\Tiles\texture1.jpg
 Content\Tiles\texture2.jpg

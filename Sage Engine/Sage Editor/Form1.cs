@@ -832,13 +832,10 @@ namespace Sage_Editor
 
             Dictionary<int, string> texturesToLoad = new Dictionary<int, string>();
             Dictionary<string,Texture2D> masterTexturesToLoad = new Dictionary<string,Texture2D>();
-
-
-
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                Map = TileMap.ReadInMap(openFileDialog1.FileName, out texturesToLoad);
+                Map = TileMap.ReadInMap(openFileDialog2.FileName, out texturesToLoad);
             string extensFound = "";
 
             try
@@ -853,9 +850,7 @@ namespace Sage_Editor
                             break;
                         }
                     }
-
-
-
+                    
                     FileStream stream = new FileStream(texPathAddress.Text + "\\" + texturespaths.Value + extensFound, FileMode.Open);
 
                     Texture2D texture = Texture2D.FromStream(GraphicsDevices, stream);
